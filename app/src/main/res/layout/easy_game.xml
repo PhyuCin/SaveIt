@@ -68,6 +68,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <TextView
+        android:id="@+id/easyEqn6"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <!--areas for dropping the answers-->
     <TextView
         android:id="@+id/answer1"

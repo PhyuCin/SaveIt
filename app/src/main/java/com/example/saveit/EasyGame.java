@@ -13,6 +13,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,10 +25,10 @@ public class EasyGame extends AppCompatActivity {
     private int margin;
 
     // TextViews
-    private TextView eqn1, eqn2, eqn3, eqn4, eqn5;
+    private TextView eqn1, eqn2, eqn3, eqn4, eqn5, eqn6;
 
     // Positions
-    private float eqn1x, eqn1y, eqn2x, eqn2y, eqn3x, eqn3y, eqn4x, eqn4y, eqn5x, eqn5y;
+    private float eqn1x, eqn1y, eqn2x, eqn2y, eqn3x, eqn3y, eqn4x, eqn4y, eqn5x, eqn5y, eqn6x, eqn6y;
 
 
     // Initialise Class
@@ -34,7 +36,10 @@ public class EasyGame extends AppCompatActivity {
     private Timer timer = new Timer();
 
 
-    private String[] equations = new String[] {"12 - 4", "3 + 5", "8/2"};
+    private String[] oneEquations;
+    private String[] twoEquations;
+    private EquationsManager em = new EquationsManager();
+
     private int count = 0;
 
     //    private Button change;
@@ -46,6 +51,8 @@ public class EasyGame extends AppCompatActivity {
     // drag id
     private int draggedTextView;
 
+    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +63,10 @@ public class EasyGame extends AppCompatActivity {
         eqn3 = (TextView) findViewById(R.id.easyEqn3);
         eqn4 = (TextView) findViewById(R.id.easyEqn4);
         eqn5 = (TextView) findViewById(R.id.easyEqn5);
+        eqn6 = (TextView) findViewById(R.id.easyEqn6);
+
+        oneEquations = em.getOne();
+        twoEquations = em.getTwo();
 
         answerStatus = (TextView) findViewById(R.id.answerStatus);
         scoresDisplay = (TextView) findViewById(R.id.scoresDisplay);
@@ -63,11 +74,15 @@ public class EasyGame extends AppCompatActivity {
         answer1 =(TextView) findViewById(R.id.answer1);
         answer2 = (TextView) findViewById(R.id.answer2);
 
+        answer1.setText("1");
+        answer2.setText("2");
+
         eqn1.setOnTouchListener(touchListener);
         eqn2.setOnTouchListener(touchListener);
         eqn3.setOnTouchListener(touchListener);
         eqn4.setOnTouchListener(touchListener);
         eqn5.setOnTouchListener(touchListener);
+        eqn6.setOnTouchListener(touchListener);
 
         answer1.setOnDragListener(dragListener1);
         answer2.setOnDragListener(dragListener2);
@@ -98,6 +113,9 @@ public class EasyGame extends AppCompatActivity {
         eqn5.setX(-80.0f + margin);
         eqn5.setY(screenHeight + 80.0f);
 
+        eqn6.setX(-80.0f + margin);
+        eqn6.setY(screenHeight + 80.0f);
+
         // Start timer
         timer.schedule(new TimerTask() {
             @Override
@@ -116,14 +134,14 @@ public class EasyGame extends AppCompatActivity {
     public void changePosition(){
         // down
 
-        eqn1y += 1;
+        eqn1y += 0.1f;
         //for going out of the screen
         if(eqn1.getY() > screenHeight){
 //            eqn1.setVisibility(View.VISIBLE);
             if (count >  2){
                 count = 0;
             }
-            eqn1.setText(equations[count]);
+            eqn1.setText(oneEquations[count]);
 
             eqn1x = (float) Math.floor(Math.random() *(screenWidth - eqn1.getWidth()));
             eqn1y = -100.0f;
@@ -135,14 +153,14 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn2y += 2;
+        eqn2y += 0.2f;
         //for going out of the screen
         if(eqn2.getY() > screenHeight){
 //            eqn2.setVisibility(View.VISIBLE);
             if (count >  2){
                 count = 0;
             }
-            eqn2.setText(equations[count]);
+            eqn2.setText(oneEquations[count]);
 
             eqn2x = (float) Math.floor(Math.random() *(screenWidth - eqn2.getWidth()));
             eqn2y = -100.0f;
@@ -154,14 +172,14 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn3y += 3;
+        eqn3y += 0.3f;
         //for going out of the screen
         if(eqn3.getY() > screenHeight){
 //            eqn3.setVisibility(View.VISIBLE);
-            if (count >  2){
+            if (count >  30){
                 count = 0;
             }
-            eqn3.setText(equations[count]);
+            eqn3.setText(oneEquations[count]);
 
             eqn3x = (float) Math.floor(Math.random() *(screenWidth - eqn3.getWidth()));
             eqn3y = -100.0f;
@@ -173,14 +191,14 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn4y += 4;
+        eqn4y += 0.4f;
         //for going out of the screen
         if(eqn4.getY() > screenHeight){
 //            eqn3.setVisibility(View.VISIBLE);
             if (count >  2){
                 count = 0;
             }
-            eqn4.setText(equations[count]);
+            eqn4.setText(twoEquations[count]);
 
             eqn4x = (float) Math.floor(Math.random() *(screenWidth - eqn4.getWidth()));
             eqn4y = -100.0f;
@@ -192,14 +210,14 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn5y += 5;
+        eqn5y += 0.5f;
         //for going out of the screen
         if(eqn5.getY() > screenHeight){
 //            eqn5.setVisibility(View.VISIBLE);
             if (count >  2){
                 count = 0;
             }
-            eqn5.setText(equations[count]);
+            eqn5.setText(twoEquations[count]);
 
             eqn5x = (float) Math.floor(Math.random() *(screenWidth - eqn5.getWidth()));
             eqn5y = -100.0f;
@@ -209,6 +227,23 @@ public class EasyGame extends AppCompatActivity {
         eqn5.setX(eqn5x + margin);
         eqn5.setY(eqn5y);
 
+
+        eqn6y += 0.6f;
+        //for going out of the screen
+        if(eqn6.getY() > screenHeight){
+//            eqn5.setVisibility(View.VISIBLE);
+            if (count >  2){
+                count = 0;
+            }
+            eqn6.setText(twoEquations[count]);
+
+            eqn6x = (float) Math.floor(Math.random() *(screenWidth - eqn6.getWidth()));
+            eqn6y = -100.0f;
+            ++count;
+        }
+
+        eqn6.setX(eqn6x + margin);
+        eqn6.setY(eqn6y);
     }
 
     // for click and drag
@@ -244,35 +279,21 @@ public class EasyGame extends AppCompatActivity {
                         eqn1.setX(-80.0f + margin);
                         eqn1.setY(screenHeight + 80.0f);
 
-//                        eqn1.setVisibility(View.INVISIBLE);
                     }
                     else if(draggedTextView == R.id.easyEqn2){
-                        answerStatus.setText("Wrong!");
+                        answerStatus.setText("Correct!");
                         eqn2.setX(-80.0f + margin);
                         eqn2.setY(screenHeight + 80.0f);
 
-//                        eqn2.setVisibility(View.INVISIBLE);
                     }
                     else if(draggedTextView == R.id.easyEqn3){
-                        answerStatus.setText("Wrong!");
+                        answerStatus.setText("Correct!");
                         eqn3.setX(-80.0f + margin);
                         eqn3.setY(screenHeight + 80.0f);
 
-//                        eqn3.setVisibility(View.INVISIBLE);
                     }
-                    else if(draggedTextView == R.id.easyEqn4){
+                    else{
                         answerStatus.setText("Wrong!");
-                        eqn4.setX(-80.0f + margin);
-                        eqn4.setY(screenHeight + 80.0f);
-
-//                        eqn4.setVisibility(View.INVISIBLE);
-                    }
-                    else if(draggedTextView == R.id.easyEqn5){
-                        answerStatus.setText("Wrong!");
-                        eqn5.setX(-80.0f + margin);
-                        eqn5.setY(screenHeight + 80.0f);
-
-//                        eqn5.setVisibility(View.INVISIBLE);
                     }
                     break;
 
@@ -294,40 +315,27 @@ public class EasyGame extends AppCompatActivity {
                     break;
 
                 case DragEvent.ACTION_DROP:
-                    if(draggedTextView == R.id.easyEqn1){
-                        answerStatus.setText("Wrong!");
-                        eqn1.setX(-80.0f + margin);
-                        eqn1.setY(screenHeight + 80.0f);
 
-//                        eqn1.setVisibility(View.INVISIBLE);
-                    }
-                    else if(draggedTextView == R.id.easyEqn2){
-                        answerStatus.setText("Correct!");
-                        eqn2.setX(-80.0f + margin);
-                        eqn2.setY(screenHeight + 80.0f);
-
-//                        eqn2.setVisibility(View.INVISIBLE);
-                    }
-                    else if(draggedTextView == R.id.easyEqn3){
-                        answerStatus.setText("Correct!");
-                        eqn3.setX(-80.0f + margin);
-                        eqn3.setY(screenHeight + 80.0f);
-
-//                        eqn3.setVisibility(View.INVISIBLE);
-                    }
-                    else if(draggedTextView == R.id.easyEqn4){
+                    if(draggedTextView == R.id.easyEqn4){
                         answerStatus.setText("Correct!");
                         eqn4.setX(-80.0f + margin);
                         eqn4.setY(screenHeight + 80.0f);
 
-//                        eqn4.setVisibility(View.INVISIBLE);
                     }
                     else if(draggedTextView == R.id.easyEqn5){
                         answerStatus.setText("Correct!");
                         eqn5.setX(-80.0f + margin);
                         eqn5.setY(screenHeight + 80.0f);
 
-//                        eqn5.setVisibility(View.INVISIBLE);
+                    }
+                    else if(draggedTextView == R.id.easyEqn6){
+                        answerStatus.setText("Correct!");
+                        eqn6.setX(-80.0f + margin);
+                        eqn6.setY(screenHeight + 80.0f);
+
+                    }
+                    else{
+                        answerStatus.setText("Wrong!");
                     }
                     break;
 
