@@ -1,20 +1,31 @@
 package com.example.saveit;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
-public class PlayMenu extends AppCompatActivity {
+public class PlayMenu extends AppCompatActivity{
     private Button back;
     private ImageButton easy, normal, hard;
+
+
+    private SharedPreferences preferences;
+
+    private final int EASY = 2;
+    private final int NORMAL = 4;
+    private final int HARD = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playmenu);
+
+        preferences = getSharedPreferences("choices", MODE_PRIVATE);
 
         back = (Button) findViewById(R.id.playMenuBack);
 
@@ -26,21 +37,30 @@ public class PlayMenu extends AppCompatActivity {
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back.setText("Easy");
+                preferences.edit()
+                        .putInt("choices", EASY)
+                        .apply();
+                back.setText(String.format("%d", preferences.getInt("choices", 0)));
             }
         });
 
         normal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back.setText("Normal");
+                preferences.edit()
+                        .putInt("choices", NORMAL)
+                        .apply();
+                back.setText(String.format("%d", preferences.getInt("choices", 0)));
             }
         });
 
         hard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                back.setText("Hard");
+                preferences.edit()
+                        .putInt("choices", HARD)
+                        .apply();
+                back.setText(String.format("%d", preferences.getInt("choices", 0)));
             }
         });
 
