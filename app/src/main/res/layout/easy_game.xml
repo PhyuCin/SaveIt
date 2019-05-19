@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EasyGame"
+    android:background="@drawable/background">
+
+    <TextView
+        android:id="@+id/easyEqn1"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/easyEqn2"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/easyEqn3"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/easyEqn4"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/easyEqn5"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--areas for dropping the answers-->
+    <TextView
+        android:id="@+id/answer1"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/answer2"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--for displaying scores and if correct or wrong-->
+
+    <LinearLayout
+        android:id="@+id/displayStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/answer1"
+        app:layout_constraintStart_toStartOf="@id/answer2"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginEnd="100dp">
+
+        <TextView
+            android:id="@+id/answerStatus"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:text="Answer Status"
+            android:textSize="19sp"
+            android:textColor="@color/black"
+            android:padding="10sp"/>
+        <TextView
+            android:id="@+id/scoresDisplay"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Points: 0"
+            android:gravity="end"
+            android:textSize="19sp"
+            android:textColor="@color/black"
+            android:padding="10sp"/>
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

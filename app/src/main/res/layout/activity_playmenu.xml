@@ -19,37 +19,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_marginBottom="20sp"
-        >
+        android:layout_marginBottom="20sp">
 
         <!--buttons for different stages-->
-        <ImageButton
+        <Button
             android:id="@+id/easyButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5sp"
-            android:src="@drawable/easy"
+            android:background="@drawable/easy"
             android:scaleType="centerInside"
-            android:adjustViewBounds="true"/>
-        <ImageButton
+            android:adjustViewBounds="true"
+            android:onClick="toEasy"/>
+        <Button
             android:id="@+id/normalButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5sp"
-            android:src="@drawable/medium"
+            android:background="@drawable/medium"
             android:scaleType="centerInside"
-            android:adjustViewBounds="true"/>
-        <ImageButton
+            android:adjustViewBounds="true"
+            android:onClick="toNormal"/>
+        <Button
             android:id="@+id/hardButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="5sp"
-            android:src="@drawable/hard"
+            android:background="@drawable/hard"
             android:scaleType="centerInside"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:onClick="toHard"/>
     </LinearLayout>
 
 </LinearLayout>
