@@ -17,10 +17,12 @@ public class PlayMenu extends AppCompatActivity {
         setContentView(R.layout.activity_playmenu);
 
         back = (Button) findViewById(R.id.playMenuBack);
+
         easy = (ImageButton) findViewById(R.id.easyButton);
         normal  = (ImageButton) findViewById(R.id.normalButton);
         hard = (ImageButton) findViewById(R.id.hardButton);
 
+        //handling the three buttons
         easy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +46,7 @@ public class PlayMenu extends AppCompatActivity {
 
     }
 
+    //on click of back button
     public void goToMainMenu(View view){
         Intent intent = new Intent(this, MainActivity.class );
         startActivity(intent);

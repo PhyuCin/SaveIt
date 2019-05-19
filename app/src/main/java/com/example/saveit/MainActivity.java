@@ -17,11 +17,13 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
     }
 
+    //on click of the play button
     public void goToPlayMenu(View view){
         Intent intent = new Intent(this, PlayMenu.class );
         startActivity(intent);
     }
 
+    //on click of the settings button
     public void goToSettings(View view){
         Intent intent = new Intent(this, Settings.class );
         startActivity(intent);
