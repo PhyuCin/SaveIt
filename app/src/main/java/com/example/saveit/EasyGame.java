@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -35,11 +36,14 @@ public class EasyGame extends AppCompatActivity {
     private Handler handler = new Handler();
     private Timer timer = new Timer();
 
+    // manage equations
+    private EquationsManager equationsManager = new EquationsManager();
+    private String[][] equationsList;
+    private String[] equations;
 
-    private String[] oneEquations;
-    private String[] twoEquations;
-    private EquationsManager em = new EquationsManager();
-
+    private Random rand;
+    private int answer1Num = 0;
+    private int answer2Num = 0;
     private int count = 0;
 
     //    private Button change;
@@ -65,8 +69,7 @@ public class EasyGame extends AppCompatActivity {
         eqn5 = (TextView) findViewById(R.id.easyEqn5);
         eqn6 = (TextView) findViewById(R.id.easyEqn6);
 
-        oneEquations = em.getOne();
-        twoEquations = em.getTwo();
+        equationsList = equationsManager.getAllEquations();
 
         answerStatus = (TextView) findViewById(R.id.answerStatus);
         scoresDisplay = (TextView) findViewById(R.id.scoresDisplay);
@@ -74,8 +77,15 @@ public class EasyGame extends AppCompatActivity {
         answer1 =(TextView) findViewById(R.id.answer1);
         answer2 = (TextView) findViewById(R.id.answer2);
 
-        answer1.setText("1");
-        answer2.setText("2");
+        // choose random answers for the two answer areas
+        rand = new Random();
+        answer1Num = rand.nextInt(9);
+        while(answer1Num == answer2Num)
+            answer2Num = rand.nextInt(9);
+
+
+        answer1.setText(Integer.toString(answer1Num));
+        answer2.setText(Integer.toString(answer2Num));
 
         eqn1.setOnTouchListener(touchListener);
         eqn2.setOnTouchListener(touchListener);
@@ -140,7 +150,7 @@ public class EasyGame extends AppCompatActivity {
             if (count >  29){
                 count = 0;
             }
-            eqn1.setText(oneEquations[count]);
+//            eqn1.setText(oneEquations[count]);
 
             eqn1x = (float) Math.floor(Math.random() *(screenWidth - eqn1.getWidth()));
             eqn1y = -100.0f;
@@ -158,7 +168,7 @@ public class EasyGame extends AppCompatActivity {
             if (count >  29){
                 count = 0;
             }
-            eqn2.setText(oneEquations[count]);
+//            eqn2.setText(oneEquations[count]);
 
             eqn2x = (float) Math.floor(Math.random() *(screenWidth - eqn2.getWidth()));
             eqn2y = -100.0f;
@@ -176,7 +186,7 @@ public class EasyGame extends AppCompatActivity {
             if (count >  29){
                 count = 0;
             }
-            eqn3.setText(oneEquations[count]);
+//            eqn3.setText(oneEquations[count]);
 
             eqn3x = (float) Math.floor(Math.random() *(screenWidth - eqn3.getWidth()));
             eqn3y = -100.0f;
@@ -194,7 +204,7 @@ public class EasyGame extends AppCompatActivity {
             if (count >  29){
                 count = 0;
             }
-            eqn4.setText(twoEquations[count]);
+//            eqn4.setText(twoEquations[count]);
 
             eqn4x = (float) Math.floor(Math.random() *(screenWidth - eqn4.getWidth()));
             eqn4y = -100.0f;
@@ -212,7 +222,7 @@ public class EasyGame extends AppCompatActivity {
             if (count >  29){
                 count = 0;
             }
-            eqn5.setText(twoEquations[count]);
+//            eqn5.setText(twoEquations[count]);
 
             eqn5x = (float) Math.floor(Math.random() *(screenWidth - eqn5.getWidth()));
             eqn5y = -100.0f;
@@ -229,7 +239,7 @@ public class EasyGame extends AppCompatActivity {
             if (count >  29){
                 count = 0;
             }
-            eqn6.setText(twoEquations[count]);
+//            eqn6.setText(twoEquations[count]);
 
             eqn6x = (float) Math.floor(Math.random() *(screenWidth - eqn6.getWidth()));
             eqn6y = -100.0f;
