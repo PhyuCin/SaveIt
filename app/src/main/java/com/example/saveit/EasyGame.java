@@ -166,13 +166,17 @@ public class EasyGame extends AppCompatActivity {
     // deals with position changing of textviews during the timer
     public void changePosition(){
 
+        if (score > 4){
+            answer1.setText("");
+            answer2.setText("");
+        }
         if (score % 5 == 0 && score != 0 && count == 0){
-            speed1 += 0.05f;
-            speed2 += 0.05f;
-            speed3 += 0.05f;
-            speed4 += 0.05f;
-            speed5 += 0.05f;
-            speed6 += 0.05f;
+            speed1 += 0.2f;
+            speed2 += 0.2f;
+            speed3 += 0.2f;
+            speed4 += 0.2f;
+            speed5 += 0.2f;
+            speed6 += 0.2f;
             ++count;
         }
 
