@@ -102,19 +102,19 @@ public class EasyGame extends AppCompatActivity {
         eqn1.setY(screenHeight + 80.0f);
 
         eqn2.setX(-80.0f + margin);
-        eqn2.setY(screenHeight + 80.0f);
+        eqn2.setY(screenHeight + 100.0f);
 
         eqn3.setX(-80.0f + margin);
-        eqn3.setY(screenHeight + 80.0f);
+        eqn3.setY(screenHeight + 120.0f);
 
         eqn4.setX(-80.0f + margin);
-        eqn4.setY(screenHeight + 80.0f);
+        eqn4.setY(screenHeight + 140.0f);
 
         eqn5.setX(-80.0f + margin);
-        eqn5.setY(screenHeight + 80.0f);
+        eqn5.setY(screenHeight + 160.0f);
 
         eqn6.setX(-80.0f + margin);
-        eqn6.setY(screenHeight + 80.0f);
+        eqn6.setY(screenHeight + 180.0f);
 
         // Start timer
         timer.schedule(new TimerTask() {
@@ -134,11 +134,10 @@ public class EasyGame extends AppCompatActivity {
     public void changePosition(){
         // down
 
-        eqn1y += 0.1f;
+        eqn1y += 0.5f;
         //for going out of the screen
         if(eqn1.getY() > screenHeight){
-//            eqn1.setVisibility(View.VISIBLE);
-            if (count >  2){
+            if (count >  29){
                 count = 0;
             }
             eqn1.setText(oneEquations[count]);
@@ -153,11 +152,10 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn2y += 0.2f;
+        eqn2y += 0.1f;
         //for going out of the screen
         if(eqn2.getY() > screenHeight){
-//            eqn2.setVisibility(View.VISIBLE);
-            if (count >  2){
+            if (count >  29){
                 count = 0;
             }
             eqn2.setText(oneEquations[count]);
@@ -172,11 +170,10 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn3y += 0.3f;
+        eqn3y += 0.15f;
         //for going out of the screen
         if(eqn3.getY() > screenHeight){
-//            eqn3.setVisibility(View.VISIBLE);
-            if (count >  30){
+            if (count >  29){
                 count = 0;
             }
             eqn3.setText(oneEquations[count]);
@@ -191,11 +188,10 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn4y += 0.4f;
+        eqn4y += 0.2f;
         //for going out of the screen
         if(eqn4.getY() > screenHeight){
-//            eqn3.setVisibility(View.VISIBLE);
-            if (count >  2){
+            if (count >  29){
                 count = 0;
             }
             eqn4.setText(twoEquations[count]);
@@ -210,11 +206,10 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn5y += 0.5f;
+        eqn5y += 0.25f;
         //for going out of the screen
         if(eqn5.getY() > screenHeight){
-//            eqn5.setVisibility(View.VISIBLE);
-            if (count >  2){
+            if (count >  29){
                 count = 0;
             }
             eqn5.setText(twoEquations[count]);
@@ -228,11 +223,10 @@ public class EasyGame extends AppCompatActivity {
         eqn5.setY(eqn5y);
 
 
-        eqn6y += 0.6f;
+        eqn6y += 0.3f;
         //for going out of the screen
         if(eqn6.getY() > screenHeight){
-//            eqn5.setVisibility(View.VISIBLE);
-            if (count >  2){
+            if (count >  29){
                 count = 0;
             }
             eqn6.setText(twoEquations[count]);
