@@ -10,10 +10,7 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.Random;
 import java.util.Timer;
@@ -39,23 +36,43 @@ public class EasyGame extends AppCompatActivity {
     // manage equations
     private EquationsManager equationsManager = new EquationsManager();
     private String[][] equationsList;
-    private String[] equations;
 
-    private Random rand;
+    private Random rand = new Random();
     private int answer1Num = 0;
     private int answer2Num = 0;
-    private int count = 0;
+    private String[] equationsSetOne;
+    private String[] equationsSetTwo;
 
-    //    private Button change;
-    private TextView answerStatus;
+    //index for random equation to be selected
+    private int randomIndex;
+
+    // text views
+    private TextView lives;
     private TextView scoresDisplay;
     private TextView answer1;
     private TextView answer2;
 
+
+    // correct status
+    private boolean isCorrect;
+    private int score = 0;
+
+    private int count = 0;
+
+    // lives
+    private int livesCount = 5;
+
     // drag id
     private int draggedTextView;
 
-    //
+    // speeds
+    private float speed1 = 0.05f;
+    private float speed2 = 0.1f;
+    private float speed3 = 0.15f;
+    private float speed4 = 0.20f;
+    private float speed5 = 0.25f;
+    private float speed6 = 0.3f;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +88,27 @@ public class EasyGame extends AppCompatActivity {
 
         equationsList = equationsManager.getAllEquations();
 
-        answerStatus = (TextView) findViewById(R.id.answerStatus);
+        lives = (TextView) findViewById(R.id.lives);
         scoresDisplay = (TextView) findViewById(R.id.scoresDisplay);
+
+        lives.setText("Lives: " + livesCount);
+        scoresDisplay.setText("Points: " + score);
 
         answer1 =(TextView) findViewById(R.id.answer1);
         answer2 = (TextView) findViewById(R.id.answer2);
 
         // choose random answers for the two answer areas
-        rand = new Random();
         answer1Num = rand.nextInt(9);
         while(answer1Num == answer2Num)
             answer2Num = rand.nextInt(9);
 
+        // set the two equations list
+        equationsSetOne = equationsList[answer1Num];
+        equationsSetTwo = equationsList[answer2Num];
 
-        answer1.setText(Integer.toString(answer1Num));
-        answer2.setText(Integer.toString(answer2Num));
+        answer1.setText(String.format("%d", (answer1Num + 1)));
+        answer2.setText(String.format("%d", (answer2Num + 1)));
+
 
         eqn1.setOnTouchListener(touchListener);
         eqn2.setOnTouchListener(touchListener);
@@ -140,21 +163,29 @@ public class EasyGame extends AppCompatActivity {
         }, 0, 20);
     }
 
-    // deals with position changing of views during the timer
+    // deals with position changing of textviews during the timer
     public void changePosition(){
-        // down
 
-        eqn1y += 0.5f;
+        if (score % 5 == 0 && score != 0 && count == 0){
+            speed1 += 0.05f;
+            speed2 += 0.05f;
+            speed3 += 0.05f;
+            speed4 += 0.05f;
+            speed5 += 0.05f;
+            speed6 += 0.05f;
+            ++count;
+        }
+
+        eqn1y += speed1;
         //for going out of the screen
         if(eqn1.getY() > screenHeight){
-            if (count >  29){
-                count = 0;
-            }
-//            eqn1.setText(oneEquations[count]);
+            //choosing random eqn
+            randomIndex = rand.nextInt(30);
+            eqn1.setText(equationsSetOne[randomIndex]);
 
             eqn1x = (float) Math.floor(Math.random() *(screenWidth - eqn1.getWidth()));
             eqn1y = -100.0f;
-            ++count;
+            lives.setText("Lives: " + livesCount);
         }
 
         eqn1.setX(eqn1x + margin);
@@ -162,17 +193,16 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn2y += 0.1f;
+        eqn2y += speed2;
         //for going out of the screen
         if(eqn2.getY() > screenHeight){
-            if (count >  29){
-                count = 0;
-            }
-//            eqn2.setText(oneEquations[count]);
+            //choosing random eqn
+            randomIndex = rand.nextInt(30);
+            eqn2.setText(equationsSetOne[randomIndex]);
 
             eqn2x = (float) Math.floor(Math.random() *(screenWidth - eqn2.getWidth()));
             eqn2y = -100.0f;
-            ++count;
+            lives.setText("Lives: " + livesCount);
         }
 
         eqn2.setX(eqn2x + margin);
@@ -180,17 +210,16 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn3y += 0.15f;
+        eqn3y += speed3;
         //for going out of the screen
         if(eqn3.getY() > screenHeight){
-            if (count >  29){
-                count = 0;
-            }
-//            eqn3.setText(oneEquations[count]);
+            //choosing random eqn
+            randomIndex = rand.nextInt(30);
+            eqn3.setText(equationsSetOne[randomIndex]);
 
             eqn3x = (float) Math.floor(Math.random() *(screenWidth - eqn3.getWidth()));
             eqn3y = -100.0f;
-            ++count;
+            lives.setText("Lives: " + livesCount);
         }
 
         eqn3.setX(eqn3x + margin);
@@ -198,17 +227,16 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn4y += 0.2f;
+        eqn4y += speed4;
         //for going out of the screen
         if(eqn4.getY() > screenHeight){
-            if (count >  29){
-                count = 0;
-            }
-//            eqn4.setText(twoEquations[count]);
+            //choosing random eqn
+            randomIndex = rand.nextInt(30);
+            eqn4.setText(equationsSetTwo[randomIndex]);
 
             eqn4x = (float) Math.floor(Math.random() *(screenWidth - eqn4.getWidth()));
             eqn4y = -100.0f;
-            ++count;
+            lives.setText("Lives: " + livesCount);
         }
 
         eqn4.setX(eqn4x + margin);
@@ -216,43 +244,40 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn5y += 0.25f;
+        eqn5y += speed5;
         //for going out of the screen
         if(eqn5.getY() > screenHeight){
-            if (count >  29){
-                count = 0;
-            }
-//            eqn5.setText(twoEquations[count]);
+            //choosing random eqn
+            randomIndex = rand.nextInt(30);
+            eqn5.setText(equationsSetTwo[randomIndex]);
 
             eqn5x = (float) Math.floor(Math.random() *(screenWidth - eqn5.getWidth()));
             eqn5y = -100.0f;
-            ++count;
+            lives.setText("Lives: " + livesCount);
         }
 
         eqn5.setX(eqn5x + margin);
         eqn5.setY(eqn5y);
 
 
-        eqn6y += 0.3f;
+        eqn6y += speed6;
         //for going out of the screen
         if(eqn6.getY() > screenHeight){
-            if (count >  29){
-                count = 0;
-            }
-//            eqn6.setText(twoEquations[count]);
+            //choosing random eqn
+            randomIndex = rand.nextInt(30);
+            eqn6.setText(equationsSetTwo[randomIndex]);
 
             eqn6x = (float) Math.floor(Math.random() *(screenWidth - eqn6.getWidth()));
             eqn6y = -100.0f;
-            ++count;
+            lives.setText("Lives: " + livesCount);
         }
 
         eqn6.setX(eqn6x + margin);
         eqn6.setY(eqn6y);
     }
 
+
     // for click and drag
-
-
     View.OnTouchListener touchListener = new View.OnTouchListener(){
 
         @Override
@@ -279,25 +304,49 @@ public class EasyGame extends AppCompatActivity {
 
                 case DragEvent.ACTION_DROP:
                     if(draggedTextView == R.id.easyEqn1){
-                        answerStatus.setText("Correct!");
                         eqn1.setX(-80.0f + margin);
                         eqn1.setY(screenHeight + 80.0f);
+                        isCorrect = true;
 
                     }
                     else if(draggedTextView == R.id.easyEqn2){
-                        answerStatus.setText("Correct!");
                         eqn2.setX(-80.0f + margin);
                         eqn2.setY(screenHeight + 80.0f);
+                        isCorrect = true;
 
                     }
                     else if(draggedTextView == R.id.easyEqn3){
-                        answerStatus.setText("Correct!");
                         eqn3.setX(-80.0f + margin);
                         eqn3.setY(screenHeight + 80.0f);
+                        isCorrect = true;
 
                     }
-                    else{
-                        answerStatus.setText("Wrong!");
+                    else if(draggedTextView == R.id.easyEqn4){
+                        eqn4.setX(-80.0f + margin);
+                        eqn4.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                    }
+                    else if(draggedTextView == R.id.easyEqn5){
+                        eqn5.setX(-80.0f + margin);
+                        eqn5.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                    }
+                    else if(draggedTextView == R.id.easyEqn6){
+                        eqn6.setX(-80.0f + margin);
+                        eqn6.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                    }
+
+                    if (isCorrect){
+                        ++score;
+                        scoresDisplay.setText("Points: " + score);
+                        count = 0;
                     }
                     break;
 
@@ -319,27 +368,52 @@ public class EasyGame extends AppCompatActivity {
                     break;
 
                 case DragEvent.ACTION_DROP:
+                    if(draggedTextView == R.id.easyEqn1){
+                        eqn1.setX(-80.0f + margin);
+                        eqn1.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
 
-                    if(draggedTextView == R.id.easyEqn4){
-                        answerStatus.setText("Correct!");
+                    }
+                    else if(draggedTextView == R.id.easyEqn2){
+                        eqn2.setX(-80.0f + margin);
+                        eqn2.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+
+                    }
+                    else if(draggedTextView == R.id.easyEqn3){
+                        eqn3.setX(-80.0f + margin);
+                        eqn3.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+
+                    }
+                    else if(draggedTextView == R.id.easyEqn4){
                         eqn4.setX(-80.0f + margin);
                         eqn4.setY(screenHeight + 80.0f);
+                        isCorrect = true;
 
                     }
                     else if(draggedTextView == R.id.easyEqn5){
-                        answerStatus.setText("Correct!");
                         eqn5.setX(-80.0f + margin);
                         eqn5.setY(screenHeight + 80.0f);
+                        isCorrect = true;
 
                     }
                     else if(draggedTextView == R.id.easyEqn6){
-                        answerStatus.setText("Correct!");
                         eqn6.setX(-80.0f + margin);
                         eqn6.setY(screenHeight + 80.0f);
+                        isCorrect = true;
 
                     }
-                    else{
-                        answerStatus.setText("Wrong!");
+                    if (isCorrect){
+                        ++score;
+                        scoresDisplay.setText("Points: " + score);
+                        count = 0;
                     }
                     break;
 
