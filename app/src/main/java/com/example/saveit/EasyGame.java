@@ -1,7 +1,12 @@
 package com.example.saveit;
 
 import android.content.ClipData;
+import android.content.Context;
 import android.graphics.Point;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -11,12 +16,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class EasyGame extends AppCompatActivity {
+
     // Screen Size
     private int screenWidth;
     private int screenHeight;
@@ -66,13 +73,15 @@ public class EasyGame extends AppCompatActivity {
     private int draggedTextView;
 
     // speeds
-    private float speed1 = 0.05f;
-    private float speed2 = 0.1f;
-    private float speed3 = 0.15f;
-    private float speed4 = 0.20f;
-    private float speed5 = 0.25f;
-    private float speed6 = 0.3f;
+    private float dogSpeed = 0.1f;
 
+    // for shaking
+    private SensorManager sensorManager;
+    private float accelerationVal; // Current acceleration values and gravity
+    private float accelerationLast; // Last acceleration values and gravity
+    private float shake; // Acc value diff from gravity
+
+    private TextView shakingDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +95,7 @@ public class EasyGame extends AppCompatActivity {
         eqn5 = (TextView) findViewById(R.id.easyEqn5);
         eqn6 = (TextView) findViewById(R.id.easyEqn6);
 
+        shakingDisplay = (TextView) findViewById(R.id.shakeDisplay);
         equationsList = equationsManager.getAllEquations();
 
         lives = (TextView) findViewById(R.id.lives);
@@ -110,6 +120,15 @@ public class EasyGame extends AppCompatActivity {
         answer2.setText(String.format("%d", (answer2Num + 1)));
 
 
+        // motion sensor
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+
+        accelerationVal = SensorManager.GRAVITY_EARTH;
+        accelerationLast = SensorManager.GRAVITY_EARTH;
+        shake = 0.00f;
+
+        // listens for touch on textviews
         eqn1.setOnTouchListener(touchListener);
         eqn2.setOnTouchListener(touchListener);
         eqn3.setOnTouchListener(touchListener);
@@ -135,19 +154,20 @@ public class EasyGame extends AppCompatActivity {
         eqn1.setY(screenHeight + 80.0f);
 
         eqn2.setX(-80.0f + margin);
-        eqn2.setY(screenHeight + 100.0f);
+        eqn2.setY(screenHeight + 80.0f);
 
         eqn3.setX(-80.0f + margin);
-        eqn3.setY(screenHeight + 120.0f);
+        eqn3.setY(screenHeight + 80.0f);
+
 
         eqn4.setX(-80.0f + margin);
-        eqn4.setY(screenHeight + 140.0f);
+        eqn4.setY(screenHeight + 80.0f);
 
         eqn5.setX(-80.0f + margin);
-        eqn5.setY(screenHeight + 160.0f);
+        eqn5.setY(screenHeight + 80.0f);
 
         eqn6.setX(-80.0f + margin);
-        eqn6.setY(screenHeight + 180.0f);
+        eqn6.setY(screenHeight + 80.0f);
 
         // Start timer
         timer.schedule(new TimerTask() {
@@ -163,6 +183,54 @@ public class EasyGame extends AppCompatActivity {
         }, 0, 20);
     }
 
+
+    // for sensing the shake
+    private final SensorEventListener sensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+
+            accelerationLast = accelerationVal;
+            accelerationVal = (float) Math.sqrt((double) (x*x + y*y + z*z));
+            float delta = accelerationVal - accelerationLast;
+            shake = shake * 0.9f + delta;
+
+            // for when shaking is true every 5 pts
+            if (shakingDisplay.getText().toString().equals("Shake the phone!")){
+                if (shake > 5){
+                    shakingDisplay.setText("");
+                    // Move out of screen;
+                    eqn1.setX(-80.0f + margin);
+                    eqn1.setY(screenHeight + 80.0f);
+
+                    eqn2.setX(-80.0f + margin);
+                    eqn2.setY(screenHeight + 80.0f);
+
+                    eqn3.setX(-80.0f + margin);
+                    eqn3.setY(screenHeight + 80.0f);
+
+
+                    eqn4.setX(-80.0f + margin);
+                    eqn4.setY(screenHeight + 80.0f);
+
+                    eqn5.setX(-80.0f + margin);
+                    eqn5.setY(screenHeight + 80.0f);
+
+                    eqn6.setX(-80.0f + margin);
+                    eqn6.setY(screenHeight + 80.0f);
+                }
+            }
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+            //
+        }
+    };
+
+
     // deals with position changing of textviews during the timer
     public void changePosition(){
 
@@ -171,16 +239,12 @@ public class EasyGame extends AppCompatActivity {
             answer2.setText("");
         }
         if (score % 5 == 0 && score != 0 && count == 0){
-            speed1 += 0.2f;
-            speed2 += 0.2f;
-            speed3 += 0.2f;
-            speed4 += 0.2f;
-            speed5 += 0.2f;
-            speed6 += 0.2f;
+            dogSpeed += 0.3f;
+            shakingDisplay.setText("Shake the phone!");
             ++count;
         }
 
-        eqn1y += speed1;
+        eqn1y += dogSpeed;
         //for going out of the screen
         if(eqn1.getY() > screenHeight){
             //choosing random eqn
@@ -197,7 +261,7 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn2y += speed2;
+        eqn2y += dogSpeed+0.1f;
         //for going out of the screen
         if(eqn2.getY() > screenHeight){
             //choosing random eqn
@@ -214,7 +278,7 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn3y += speed3;
+        eqn3y += dogSpeed +0.2f;
         //for going out of the screen
         if(eqn3.getY() > screenHeight){
             //choosing random eqn
@@ -231,7 +295,7 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn4y += speed4;
+        eqn4y += dogSpeed+0.05f;
         //for going out of the screen
         if(eqn4.getY() > screenHeight){
             //choosing random eqn
@@ -248,7 +312,7 @@ public class EasyGame extends AppCompatActivity {
 
 
 
-        eqn5y += speed5;
+        eqn5y += dogSpeed+0.15f;
         //for going out of the screen
         if(eqn5.getY() > screenHeight){
             //choosing random eqn
@@ -264,7 +328,7 @@ public class EasyGame extends AppCompatActivity {
         eqn5.setY(eqn5y);
 
 
-        eqn6y += speed6;
+        eqn6y += dogSpeed+0.25f;
         //for going out of the screen
         if(eqn6.getY() > screenHeight){
             //choosing random eqn
