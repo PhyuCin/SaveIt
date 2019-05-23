@@ -108,7 +108,7 @@
     <LinearLayout
         android:id="@+id/displayStatus"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45sp"
         android:orientation="horizontal"
 
         app:layout_constraintTop_toTopOf="parent"
@@ -131,13 +131,21 @@
         <TextView
             android:id="@+id/scoresDisplay"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:gravity="end"
             android:textSize="15sp"
             android:textColor="@color/white"
             android:padding="10sp"
             android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/pausePlayButton"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:background="@drawable/pause"
+            android:onClick="pauseGame"
+            android:gravity="center"/>
     </LinearLayout>
 
     <TextView
@@ -159,4 +167,46 @@
         android:layout_marginRight="100dp"
         android:layout_marginEnd="100dp"/>
 
+
+    <LinearLayout
+        android:id="@+id/pausedScreen"
+        android:layout_width="250sp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+
+        android:background="@color/white"
+        android:padding="20sp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="50sp"
+            android:text="Paused"
+            android:textColor="@color/black"
+            android:layout_margin="20sp"
+            />
+
+        <Button
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="Main Menu"
+            android:padding="5sp"
+            android:onClick="goToMainMenu"/>
+
+        <Button
+            android:layout_width="150sp"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:padding="5sp"
+            android:layout_marginBottom="20sp"
+            android:onClick="goToSettings"/>
+
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

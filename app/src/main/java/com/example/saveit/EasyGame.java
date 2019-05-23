@@ -1,7 +1,9 @@
 package com.example.saveit;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -15,6 +17,8 @@ import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +26,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class EasyGame extends AppCompatActivity {
+public class EasyGame extends AppCompatActivity{
 
     // Screen Size
     private int screenWidth;
@@ -83,6 +87,11 @@ public class EasyGame extends AppCompatActivity {
 
     private TextView shakingDisplay;
 
+    // for pause play
+    private Button pausePlay;
+    private Boolean paused = false;
+    private LinearLayout pausedScreen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,6 +109,10 @@ public class EasyGame extends AppCompatActivity {
 
         lives = (TextView) findViewById(R.id.lives);
         scoresDisplay = (TextView) findViewById(R.id.scoresDisplay);
+        pausePlay = (Button) findViewById(R.id.pausePlayButton);
+        pausedScreen = (LinearLayout) findViewById(R.id.pausedScreen);
+
+        pausedScreen.setVisibility(View.INVISIBLE);
 
         lives.setText("Lives: " + livesCount);
         scoresDisplay.setText("Points: " + score);
@@ -489,4 +502,49 @@ public class EasyGame extends AppCompatActivity {
             return true;
         }
     };
+
+    public void pauseGame(View view){
+        if(paused){
+            pausePlay.setBackgroundResource(R.drawable.pause);
+            paused = false;
+            pausedScreen.setVisibility(View.INVISIBLE);
+
+            // Start timer
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            changePosition();
+                        }
+                    });
+                }
+            }, 0, 20);
+        }
+
+        else{
+            pausePlay.setBackgroundResource(R.drawable.play);
+            paused = true;
+
+            timer.cancel();
+            timer = null;
+
+            pausedScreen.setVisibility(View.VISIBLE);
+        }
+    }
+
+    //on click of back button
+    public void goToMainMenu(View view){
+        Intent intent = new Intent(this, MainActivity.class );
+        startActivity(intent);
+    }
+
+    //on click of the settings button
+    public void goToSettings(View view){
+        Intent intent = new Intent(this, Settings.class );
+        startActivity(intent);
+    }
+
 }
