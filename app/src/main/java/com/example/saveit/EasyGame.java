@@ -1,6 +1,5 @@
 package com.example.saveit;
 
-import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +19,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Random;
 import java.util.Timer;
@@ -35,10 +33,10 @@ public class EasyGame extends AppCompatActivity{
 
     // TextViews
     private TextView eqn1, eqn2, eqn3, eqn4, eqn5, eqn6;
+    private TextView[] eqnTextViewsList;
 
     // Positions
     private float eqn1x, eqn1y, eqn2x, eqn2y, eqn3x, eqn3y, eqn4x, eqn4y, eqn5x, eqn5y, eqn6x, eqn6y;
-
 
     // Initialise Class
     private Handler handler = new Handler();
@@ -90,7 +88,13 @@ public class EasyGame extends AppCompatActivity{
     // for pause play
     private Button pausePlay;
     private Boolean paused = false;
-    private LinearLayout pausedScreen;
+    private LinearLayout overlayScreen;
+
+    // for gameover
+    private boolean lose;
+    private TextView overlayTitle;
+    private TextView finalScoreDisplay;
+    private Button restartGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,21 +108,28 @@ public class EasyGame extends AppCompatActivity{
         eqn5 = (TextView) findViewById(R.id.easyEqn5);
         eqn6 = (TextView) findViewById(R.id.easyEqn6);
 
+        eqnTextViewsList = new TextView[]{eqn1,eqn2,eqn3,eqn4,eqn5,eqn6};
+
+
         shakingDisplay = (TextView) findViewById(R.id.shakeDisplay);
         equationsList = equationsManager.getAllEquations();
 
         lives = (TextView) findViewById(R.id.lives);
         scoresDisplay = (TextView) findViewById(R.id.scoresDisplay);
         pausePlay = (Button) findViewById(R.id.pausePlayButton);
-        pausedScreen = (LinearLayout) findViewById(R.id.pausedScreen);
+        overlayScreen = (LinearLayout) findViewById(R.id.overlayScreen);
 
-        pausedScreen.setVisibility(View.INVISIBLE);
+        overlayScreen.setVisibility(View.INVISIBLE);
 
         lives.setText("Lives: " + livesCount);
         scoresDisplay.setText("Points: " + score);
 
         answer1 =(TextView) findViewById(R.id.answer1);
         answer2 = (TextView) findViewById(R.id.answer2);
+
+        overlayTitle = (TextView) findViewById(R.id.overlayTitle);
+        finalScoreDisplay = (TextView) findViewById(R.id.loseScoreDisplay);
+        restartGame = (Button) findViewById(R.id.restartGame);
 
         // choose random answers for the two answer areas
         answer1Num = rand.nextInt(9);
@@ -141,18 +152,6 @@ public class EasyGame extends AppCompatActivity{
         accelerationLast = SensorManager.GRAVITY_EARTH;
         shake = 0.00f;
 
-        // listens for touch on textviews
-        eqn1.setOnTouchListener(touchListener);
-        eqn2.setOnTouchListener(touchListener);
-        eqn3.setOnTouchListener(touchListener);
-        eqn4.setOnTouchListener(touchListener);
-        eqn5.setOnTouchListener(touchListener);
-        eqn6.setOnTouchListener(touchListener);
-
-        answer1.setOnDragListener(dragListener1);
-        answer2.setOnDragListener(dragListener2);
-
-
         // Get screen size
         WindowManager windowManager = getWindowManager();
         Display display = windowManager.getDefaultDisplay();
@@ -162,25 +161,16 @@ public class EasyGame extends AppCompatActivity{
         screenHeight = size.y;
         margin = size.x/6;
 
-        // Move out of screen;
-        eqn1.setX(-80.0f + margin);
-        eqn1.setY(screenHeight + 80.0f);
+        // listens for touch on textviews
+        // Move out of screen (top)
+        for (TextView tv : eqnTextViewsList){
+            tv.setOnTouchListener(touchListener);
+            tv.setX(-80.0f + margin);
+            tv.setY(screenHeight + 80.0f);
+        }
 
-        eqn2.setX(-80.0f + margin);
-        eqn2.setY(screenHeight + 80.0f);
-
-        eqn3.setX(-80.0f + margin);
-        eqn3.setY(screenHeight + 80.0f);
-
-
-        eqn4.setX(-80.0f + margin);
-        eqn4.setY(screenHeight + 80.0f);
-
-        eqn5.setX(-80.0f + margin);
-        eqn5.setY(screenHeight + 80.0f);
-
-        eqn6.setX(-80.0f + margin);
-        eqn6.setY(screenHeight + 80.0f);
+        answer1.setOnDragListener(dragListener1);
+        answer2.setOnDragListener(dragListener2);
 
         // Start timer
         timer.schedule(new TimerTask() {
@@ -246,6 +236,10 @@ public class EasyGame extends AppCompatActivity{
 
     // deals with position changing of textviews during the timer
     public void changePosition(){
+        if (livesCount == 0 || eqn1y > screenHeight - 150 || eqn2y > screenHeight - 150 || eqn3y > screenHeight - 150
+                || eqn4y > screenHeight - 150
+                || eqn5y > screenHeight - 150
+                || eqn6y > screenHeight - 150) gameOver();
 
         if (score > 4){
             answer1.setText("");
@@ -257,7 +251,7 @@ public class EasyGame extends AppCompatActivity{
             ++count;
         }
 
-        eqn1y += dogSpeed;
+        eqn1y += dogSpeed ;
         //for going out of the screen
         if(eqn1.getY() > screenHeight){
             //choosing random eqn
@@ -507,7 +501,11 @@ public class EasyGame extends AppCompatActivity{
         if(paused){
             pausePlay.setBackgroundResource(R.drawable.pause);
             paused = false;
-            pausedScreen.setVisibility(View.INVISIBLE);
+            overlayScreen.setVisibility(View.INVISIBLE);
+
+            for (TextView tv : eqnTextViewsList){
+                tv.setVisibility(View.VISIBLE);
+            }
 
             // Start timer
             timer = new Timer();
@@ -531,8 +529,25 @@ public class EasyGame extends AppCompatActivity{
             timer.cancel();
             timer = null;
 
-            pausedScreen.setVisibility(View.VISIBLE);
+            for (TextView tv : eqnTextViewsList){
+                tv.setVisibility(View.INVISIBLE);
+            }
+
+            overlayScreen.setVisibility(View.VISIBLE);
+
         }
+    }
+
+    // handle game over
+    public void gameOver(){
+        // for when the player runs out of lives or any of the text views touches the ground
+        timer.cancel();
+        timer = null;
+
+        overlayScreen.setVisibility(View.VISIBLE);
+        overlayTitle.setText("Game Over!");
+        restartGame.setText("Play Again");
+        finalScoreDisplay.setText("Score: " + score);
     }
 
     //on click of back button
@@ -547,4 +562,8 @@ public class EasyGame extends AppCompatActivity{
         startActivity(intent);
     }
 
+    public void toRestartGame(View view){
+        Intent intent = new Intent(this, this.getClass());
+        startActivity(intent);
+    }
 }
