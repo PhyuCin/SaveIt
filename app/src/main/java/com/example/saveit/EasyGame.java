@@ -1,9 +1,9 @@
 package com.example.saveit;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -100,16 +100,15 @@ public class EasyGame extends AppCompatActivity{
     private Button restartGame;
 
     // save score for adding to High Scores
-    private SharedPreferences preferences;
     private ArrayList<Integer> highScores = new ArrayList<Integer>();
     private boolean isDuplicate = false;
 
+    @SuppressLint({"SetTextI18n", "DefaultLocale", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.easy_game);
 
-        preferences = getSharedPreferences("value", MODE_PRIVATE);
         highScores = highScores = FileHelper.readData(this);
 
 
@@ -253,6 +252,7 @@ public class EasyGame extends AppCompatActivity{
 
 
     // deals with position changing of textviews during the timer
+    @SuppressLint("SetTextI18n")
     public void changePosition(){
 
         if (score > 4){
@@ -261,7 +261,7 @@ public class EasyGame extends AppCompatActivity{
         }
         if (score % 5 == 0 && score != 0 && count == 0){
             dogSpeed += 0.3f;
-            shakingDisplay.setText("Shake the phone!");
+            shakingDisplay.setText(getString(R.string.shakeMessage));
             ++count;
         }
 
@@ -366,9 +366,10 @@ public class EasyGame extends AppCompatActivity{
     }
 
 
-    // for click and drag
+    // for touch
     View.OnTouchListener touchListener = new View.OnTouchListener(){
 
+        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             ClipData data = ClipData.newPlainText("", "");
@@ -379,7 +380,9 @@ public class EasyGame extends AppCompatActivity{
         }
     };
 
+    // drag to answer 1
     View.OnDragListener dragListener1 = new View.OnDragListener() {
+        @SuppressLint("SetTextI18n")
         @Override
         public boolean onDrag(View v, DragEvent event) {
             int dragEvent = event.getAction();
@@ -444,7 +447,9 @@ public class EasyGame extends AppCompatActivity{
         }
     };
 
+    // drag to answer 2
     View.OnDragListener dragListener2 = new View.OnDragListener() {
+        @SuppressLint("SetTextI18n")
         @Override
         public boolean onDrag(View v, DragEvent event) {
             int dragEvent = event.getAction();
@@ -559,10 +564,9 @@ public class EasyGame extends AppCompatActivity{
     }
 
     // handle game over
+    @SuppressLint("SetTextI18n")
     public void gameOver(){
         // for when the player runs out of lives or any of the text views touches the ground
-//        timer.cancel();
-//        timer = null;
 
         for (TextView tv : eqnTextViewsList){
             tv.setVisibility(View.INVISIBLE);
@@ -574,12 +578,12 @@ public class EasyGame extends AppCompatActivity{
 
 
         if (highestScore < score){
-            overlayTitle.setText("New Highscore!");
+            overlayTitle.setText(getString(R.string.newHighScore));
         }
 
-        else overlayTitle.setText("Game Over!");
+        else overlayTitle.setText(getString(R.string.gameover));
 
-        restartGame.setText("Play Again");
+        restartGame.setText(getString(R.string.playAgain));
         finalScoreDisplay.setText("Score: " + score);
 
         saveScore();

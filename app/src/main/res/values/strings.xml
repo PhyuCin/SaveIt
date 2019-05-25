@@ -3,4 +3,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="shakeMessage">Shake the phone!</string>
+    <string name="newHighScore">New High Score!</string>
+    <string name="gameover">Game Over!</string>
+    <string name="playAgain">Play Again</string>
 </resources>

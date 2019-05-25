@@ -1,5 +1,6 @@
 package com.example.saveit;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class HighScores extends AppCompatActivity {
 
@@ -16,6 +16,7 @@ public class HighScores extends AppCompatActivity {
     private TextView[] allTextViews;
     private ArrayList<Integer> highScores = new ArrayList<Integer>();
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
