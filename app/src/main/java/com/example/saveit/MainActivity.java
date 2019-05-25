@@ -23,6 +23,12 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
+    //on click of the highscores button
+    public void goToHighScores(View view){
+        Intent intent = new Intent(this, HighScores.class );
+        startActivity(intent);
+    }
+
     //on click of the settings button
     public void goToSettings(View view){
         Intent intent = new Intent(this, Settings.class );

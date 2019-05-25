@@ -10,22 +10,12 @@ import android.widget.Button;
 public class PlayMenu extends AppCompatActivity{
     private Button back;
     private Button easy, normal, hard;
-    private Intent easyGame;
 
-
-    private SharedPreferences preferences;
-
-    //number of answers to be displayed for each difficulties
-    private final int EASY = 2;
-    private final int NORMAL = 4;
-    private final int HARD = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playmenu);
-
-        preferences = getSharedPreferences("choices", MODE_PRIVATE);
 
         back = (Button) findViewById(R.id.playMenuBack);
 
@@ -44,29 +34,18 @@ public class PlayMenu extends AppCompatActivity{
 
     //handling the three buttons
     public void toEasy(View view){
-        preferences.edit()
-                .putInt("choices", EASY)
-                .apply();
-
         Intent intent = new Intent(this, EasyGame.class );
         startActivity(intent);
     }
 
     //on click of back button
     public void toNormal(View view){
-        preferences.edit()
-                .putInt("choices", NORMAL)
-                .apply();
-
         Intent intent = new Intent(this, MainActivity.class );
         startActivity(intent);
     }
 
     //on click of back button
     public void toHard(View view){
-        preferences.edit()
-                .putInt("choices", HARD)
-                .apply();
 
         Intent intent = new Intent(this, MainActivity.class );
         startActivity(intent);

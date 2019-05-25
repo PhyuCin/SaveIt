@@ -3,6 +3,7 @@ package com.example.saveit;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -20,6 +21,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -96,10 +99,19 @@ public class EasyGame extends AppCompatActivity{
     private TextView finalScoreDisplay;
     private Button restartGame;
 
+    // save score for adding to High Scores
+    private SharedPreferences preferences;
+    private ArrayList<Integer> highScores = new ArrayList<Integer>();
+    private boolean isDuplicate = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.easy_game);
+
+        preferences = getSharedPreferences("value", MODE_PRIVATE);
+        highScores = highScores = FileHelper.readData(this);
+
 
         eqn1 = (TextView) findViewById(R.id.easyEqn1);
         eqn2 = (TextView) findViewById(R.id.easyEqn2);
@@ -180,6 +192,12 @@ public class EasyGame extends AppCompatActivity{
                     @Override
                     public void run() {
                         changePosition();
+                        if (livesCount == 0 || eqn1y > screenHeight - 150 || eqn2y > screenHeight - 150 || eqn3y > screenHeight - 150
+                                || eqn4y > screenHeight - 150
+                                || eqn5y > screenHeight - 150
+                                || eqn6y > screenHeight - 150) {
+                            gameOver();
+                        }
                     }
                 });
             }
@@ -236,10 +254,6 @@ public class EasyGame extends AppCompatActivity{
 
     // deals with position changing of textviews during the timer
     public void changePosition(){
-        if (livesCount == 0 || eqn1y > screenHeight - 150 || eqn2y > screenHeight - 150 || eqn3y > screenHeight - 150
-                || eqn4y > screenHeight - 150
-                || eqn5y > screenHeight - 150
-                || eqn6y > screenHeight - 150) gameOver();
 
         if (score > 4){
             answer1.setText("");
@@ -516,6 +530,12 @@ public class EasyGame extends AppCompatActivity{
                         @Override
                         public void run() {
                             changePosition();
+                            if (livesCount == 0 || eqn1y > screenHeight - 150 || eqn2y > screenHeight - 150 || eqn3y > screenHeight - 150
+                                    || eqn4y > screenHeight - 150
+                                    || eqn5y > screenHeight - 150
+                                    || eqn6y > screenHeight - 150) {
+                                gameOver();
+                            }
                         }
                     });
                 }
@@ -541,13 +561,55 @@ public class EasyGame extends AppCompatActivity{
     // handle game over
     public void gameOver(){
         // for when the player runs out of lives or any of the text views touches the ground
-        timer.cancel();
-        timer = null;
+//        timer.cancel();
+//        timer = null;
+
+        for (TextView tv : eqnTextViewsList){
+            tv.setVisibility(View.INVISIBLE);
+        }
+
+        int highestScore = highScores.get(0);
 
         overlayScreen.setVisibility(View.VISIBLE);
-        overlayTitle.setText("Game Over!");
+
+
+        if (highestScore < score){
+            overlayTitle.setText("New Highscore!");
+        }
+
+        else overlayTitle.setText("Game Over!");
+
         restartGame.setText("Play Again");
         finalScoreDisplay.setText("Score: " + score);
+
+        saveScore();
+    }
+
+
+    //save score
+    public void saveScore(){
+        // check duplicates
+
+        for (int s : highScores) {
+            if (s == score) {
+                isDuplicate = true;
+            }
+        }
+
+        if (!isDuplicate) {
+            highScores.add(score);
+            System.out.println(highScores);
+            //using Collections.sort() to sort ArrayList descending
+            Collections.sort(highScores, Collections.reverseOrder());
+
+            if(highScores.size() > 5){
+                //remove the extra value
+                highScores.remove(highScores.size() - 1);
+            }
+            //save to file
+            FileHelper.writeData(highScores, this);
+            System.out.println(highScores);
+        }
     }
 
     //on click of back button
