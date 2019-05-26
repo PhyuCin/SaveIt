@@ -19,7 +19,7 @@
         android:onClick="goToMainMenu"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-
+        android:textStyle="bold"
         />
 
 

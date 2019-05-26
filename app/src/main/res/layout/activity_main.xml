@@ -34,6 +34,7 @@
         android:text="@string/instructions1"
         android:layout_marginRight="50sp"
         android:layout_marginLeft="50sp"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -46,6 +47,7 @@
         android:text="@string/instructions2"
         android:layout_marginRight="50sp"
         android:layout_marginLeft="50sp"
+        android:textStyle="bold"
         />
 
     <TextView
@@ -58,6 +60,7 @@
         android:text="@string/instructions2"
         android:layout_marginRight="50sp"
         android:layout_marginLeft="50sp"
+        android:textStyle="bold"
         />
 
     <!--buttons-->
@@ -79,7 +82,8 @@
             android:text="@string/play"
             android:onClick="goToPlayMenu"
             android:background="@drawable/buttonbg"
-            tools:ignore="NestedWeights" />
+            tools:ignore="NestedWeights"
+            android:textStyle="bold"/>
         <Button
             android:id="@+id/menuButtonHighScores"
             android:layout_width="0dp"
@@ -89,7 +93,8 @@
             android:layout_marginLeft="10sp"
             android:onClick="goToHighScores"
             android:background="@drawable/buttonbg"
-            tools:ignore="RtlHardcoded" />
+            tools:ignore="RtlHardcoded"
+            android:textStyle="bold"/>
         <Button
             android:id="@+id/menuButtonSettings"
             android:layout_width="0dp"
@@ -98,7 +103,8 @@
             android:text="Settings"
             android:layout_marginLeft="10sp"
             android:onClick="goToSettings"
-            android:background="@drawable/buttonbg"/>
+            android:background="@drawable/buttonbg"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

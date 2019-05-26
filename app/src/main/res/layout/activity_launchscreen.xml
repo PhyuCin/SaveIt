@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/splashscreenImage"
-        android:layout_width="300sp"
-        android:layout_height="300sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
