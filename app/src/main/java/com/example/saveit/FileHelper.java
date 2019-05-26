@@ -11,9 +11,11 @@ import java.util.ArrayList;
 
 public class FileHelper {
 
-    public static final String FILENAME = "listinfo.dat";
+    public static final String FILENAME = "easyHighScore.dat";
+    public static final String FILENAME2 = "hardHighScore.dat";
 
-    public static void writeData(ArrayList<Integer> scores, Context context){
+
+    public static void writeDataEasy(ArrayList<Integer> scores, Context context){
         try {
             FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -26,10 +28,40 @@ public class FileHelper {
         }
     }
 
-    public static ArrayList<Integer> readData(Context context){
+    public static void writeDataHard(ArrayList<Integer> scores, Context context){
+        try {
+            FileOutputStream fos = context.openFileOutput(FILENAME2, Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(scores);
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<Integer> readDataEasy(Context context){
         ArrayList<Integer> scoresList = null;
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            scoresList = (ArrayList<Integer>) ois.readObject();
+        } catch (FileNotFoundException e) {
+            scoresList = new ArrayList<>();
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return scoresList;
+    }
+
+    public static ArrayList<Integer> readDataHard(Context context){
+        ArrayList<Integer> scoresList = null;
+        try {
+            FileInputStream fis = context.openFileInput(FILENAME2);
             ObjectInputStream ois = new ObjectInputStream(fis);
             scoresList = (ArrayList<Integer>) ois.readObject();
         } catch (FileNotFoundException e) {

@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".Settings"
     android:orientation="vertical"
-    android:background="@drawable/bgone">
+    android:background="@drawable/bgone"
+    android:id="@+id/settingsLayout">
 
     <Button
         android:id="@+id/playMenuBack"
@@ -21,8 +22,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
-        android:textSize="50sp"
+        android:text="@string/settings"
+        android:textSize="34sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:layout_margin="5sp"
@@ -30,55 +31,64 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="20sp"
         android:layout_gravity="center"
         android:layout_marginStart="50sp"
-        android:layout_marginEnd="50sp">
-
-
+        android:layout_marginEnd="50sp"
+        android:layout_marginBottom="50sp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:orientation="horizontal"
+            android:layout_marginTop="10sp">
 
             <TextView
                 android:id="@+id/third"
                 android:layout_width="0dp"
                 android:layout_weight="2"
                 android:layout_height="match_parent"
-                android:text="Background"
+                android:text="@string/background"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:gravity="center"
+                tools:ignore="NestedWeights" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_margin="2sp"
+                android:background="@drawable/bgone"
+                android:onClick="changeToBackground1"
                 />
+            <Button
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_margin="2sp"
+                android:background="@drawable/bgtwo"
+                android:onClick="changeToBackground2"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="1"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="2"/>
-
-            <Button
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:text="3"/>
+                android:layout_margin="2sp"
+                android:background="@drawable/bgthree"
+                android:onClick="changeToBackground3"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:layout_marginTop="10sp">
 
             <TextView
                 android:layout_width="0dp"
@@ -95,26 +105,31 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="1"/>
+                android:layout_margin="2sp"
+                android:background="@drawable/dogone"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="2"/>
+                android:layout_margin="2sp"
+                android:background="@drawable/dogtwo"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="3"/>
+                android:layout_margin="2sp"
+                android:background="@drawable/dogthree"/>
         </LinearLayout>
 
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_marginTop="10sp">
 
             <TextView
                 android:layout_width="0dp"
@@ -131,31 +146,42 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="1"/>
+                android:text="@string/three"
+                android:background="@drawable/buttonbg"
+                android:layout_margin="2sp"
+                android:textStyle="bold"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="2"/>
+                android:text="@string/five"
+                android:background="@drawable/buttonbg"
+                android:layout_margin="2sp"
+                android:textStyle="bold"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
-                android:text="3"/>
+                android:text="@string/ten"
+                android:background="@drawable/buttonbg"
+                android:layout_margin="2sp"
+                android:textStyle="bold"/>
         </LinearLayout>
 
 
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="250sp"
+            android:layout_height="0dp"
+            android:layout_weight="2"
             android:text="@string/reset_high_scores"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="center"
-            android:layout_margin="5sp"
+            android:layout_marginTop="15sp"
             android:onClick="resetHighScores"
+            android:background="@drawable/buttonbg"
             />
 
 

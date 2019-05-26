@@ -1,9 +1,12 @@
 package com.example.saveit;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -11,11 +14,63 @@ import java.util.ArrayList;
 public class Settings extends AppCompatActivity {
     private ArrayList<Integer> highScores = new ArrayList<Integer>();
 
+    // set background
+    private int background;
+    private SharedPreferences preferences;
+    private LinearLayout settingsLayout;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        preferences = getSharedPreferences("value", MODE_PRIVATE);
+        settingsLayout = (LinearLayout) findViewById(R.id.settingsLayout);
+
+
     }
+
+    // handles backgrounds
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //change background
+        background = preferences.getInt("background number", 0);
+        if (background == 0) {
+            settingsLayout.setBackgroundResource(R.drawable.bgone);
+        } else if (background == 1) {
+            settingsLayout.setBackgroundResource(R.drawable.bgtwo);
+        } else if (background == 2) {
+            settingsLayout.setBackgroundResource(R.drawable.bgthree);
+        }
+    }
+
+    //on click of background 1
+    public void changeToBackground1(View view){
+        preferences.edit()
+                .putInt("background number", 0)
+                .apply();
+        settingsLayout.setBackgroundResource(R.drawable.bgone);
+    }
+
+    //on click of background 2
+    public void changeToBackground2(View view){
+        preferences.edit()
+                .putInt("background number", 1)
+                .apply();
+        settingsLayout.setBackgroundResource(R.drawable.bgtwo);
+    }
+
+    //on click of background 3
+    public void changeToBackground3 (View view){
+        preferences.edit()
+                .putInt("background number", 2)
+                .apply();
+        settingsLayout.setBackgroundResource(R.drawable.bgthree);
+    }
+
 
     //on click of back button
     public void goToMainMenu(View view){
@@ -25,7 +80,7 @@ public class Settings extends AppCompatActivity {
 
     //on click of reset high scores
     public void resetHighScores(View view){
-        FileHelper.writeData(highScores, this);
+        FileHelper.writeDataEasy(highScores, this);
         Toast.makeText(this, "High scores have been reset", Toast.LENGTH_SHORT).show();
     }
 }

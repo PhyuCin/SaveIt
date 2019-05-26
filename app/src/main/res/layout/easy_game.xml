@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EasyGame"
-    android:background="@drawable/bgone">
+    android:background="@drawable/bgone"
+    android:id="@+id/easyLayout">
 
     <TextView
         android:id="@+id/easyEqn1"

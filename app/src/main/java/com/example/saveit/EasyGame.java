@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -11,6 +12,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Display;
 import android.view.DragEvent;
@@ -28,6 +30,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class EasyGame extends AppCompatActivity{
+
+    // for handling background change and dog change
+    private SharedPreferences preferences;
+    private int background;
+    private int dog;
+    private ConstraintLayout easyLayout;
 
     // Screen Size
     private int screenWidth;
@@ -114,8 +122,13 @@ public class EasyGame extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.easy_game);
 
-        highScores = highScores = FileHelper.readData(this);
+        preferences = getSharedPreferences("value", MODE_PRIVATE);
+        easyLayout = (ConstraintLayout) findViewById(R.id.easyLayout);
 
+        highScores = highScores = FileHelper.readDataEasy(this);
+
+
+        // handles audio
         soundManager = new SoundManager(this);
 
         correctAudio = soundManager.addSound(R.raw.correct);
@@ -214,6 +227,48 @@ public class EasyGame extends AppCompatActivity{
                 });
             }
         }, 0, 20);
+    }
+
+    // handles backgrounds and dogs
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //change background
+        background = preferences.getInt("background number", 0);
+        if (background == 0) {
+            easyLayout.setBackgroundResource(R.drawable.bgone);
+        } else if (background == 1) {
+            easyLayout.setBackgroundResource(R.drawable.bgtwo);
+        } else if (background == 2) {
+            easyLayout.setBackgroundResource(R.drawable.bgthree);
+        }
+
+        //change dogs;
+        dog = preferences.getInt("dog number", 0);
+        if (dog == 0) {
+            eqn1.setBackgroundResource(R.drawable.dogone);
+            eqn2.setBackgroundResource(R.drawable.dogone);
+            eqn3.setBackgroundResource(R.drawable.dogone);
+            eqn4.setBackgroundResource(R.drawable.dogone);
+            eqn5.setBackgroundResource(R.drawable.dogone);
+            eqn6.setBackgroundResource(R.drawable.dogone);
+
+        } else if (dog == 1) {
+            eqn1.setBackgroundResource(R.drawable.dogtwo);
+            eqn2.setBackgroundResource(R.drawable.dogtwo);
+            eqn3.setBackgroundResource(R.drawable.dogtwo);
+            eqn4.setBackgroundResource(R.drawable.dogtwo);
+            eqn5.setBackgroundResource(R.drawable.dogtwo);
+            eqn6.setBackgroundResource(R.drawable.dogtwo);
+        } else if (dog == 2) {
+            eqn1.setBackgroundResource(R.drawable.dogthree);
+            eqn2.setBackgroundResource(R.drawable.dogthree);
+            eqn3.setBackgroundResource(R.drawable.dogthree);
+            eqn4.setBackgroundResource(R.drawable.dogthree);
+            eqn5.setBackgroundResource(R.drawable.dogthree);
+            eqn6.setBackgroundResource(R.drawable.dogthree);
+        }
     }
 
 
@@ -635,7 +690,7 @@ public class EasyGame extends AppCompatActivity{
                 highScores.remove(highScores.size() - 1);
             }
             //save to file
-            FileHelper.writeData(highScores, this);
+            FileHelper.writeDataEasy(highScores, this);
             System.out.println(highScores);
         }
     }

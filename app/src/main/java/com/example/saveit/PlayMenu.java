@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class PlayMenu extends AppCompatActivity{
     private Button back;
     private Button easy, normal, hard;
+
+    private SharedPreferences preferences;
+    private LinearLayout playMenuLayout;
+    private int background;
 
 
     @Override
@@ -17,12 +22,31 @@ public class PlayMenu extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_playmenu);
 
+        preferences = getSharedPreferences("value", MODE_PRIVATE);
+        playMenuLayout = (LinearLayout) findViewById(R.id.playMenuLayout);
+
         back = (Button) findViewById(R.id.playMenuBack);
 
         easy = (Button) findViewById(R.id.easyButton);
         normal  = (Button) findViewById(R.id.normalButton);
         hard = (Button) findViewById(R.id.hardButton);
 
+    }
+
+    // handles backgrounds
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //change background
+        background = preferences.getInt("background number", 0);
+        if (background == 0) {
+            playMenuLayout.setBackgroundResource(R.drawable.bgone);
+        } else if (background == 1) {
+            playMenuLayout.setBackgroundResource(R.drawable.bgtwo);
+        } else if (background == 2) {
+            playMenuLayout.setBackgroundResource(R.drawable.bgthree);
+        }
     }
 
     //on click of back button

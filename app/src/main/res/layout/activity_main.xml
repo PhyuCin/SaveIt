@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/bgone">
+    android:background="@drawable/bgone"
+    android:id="@+id/mainLayout"
+    >
 
     <!--instructions box-->
 
@@ -17,12 +18,11 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:text="@string/instructonsTitle"
         android:gravity="center"
-        android:textSize="40sp"
-        android:textStyle="bold"
+        android:text="@string/instructonsTitle"
         android:textColor="@color/black"
-        />
+        android:textSize="34sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/instructions1"
@@ -30,7 +30,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:text="@string/instructions1"
         android:layout_marginRight="50sp"
         android:layout_marginLeft="50sp"
@@ -42,7 +42,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:text="@string/instructions2"
         android:layout_marginRight="50sp"
         android:layout_marginLeft="50sp"
@@ -54,7 +54,7 @@
         android:layout_height="0dp"
         android:layout_weight="2"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="23sp"
         android:text="@string/instructions2"
         android:layout_marginRight="50sp"
         android:layout_marginLeft="50sp"
@@ -76,18 +76,20 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="Play"
+            android:text="@string/play"
             android:onClick="goToPlayMenu"
-            android:background="@drawable/buttonbg"/>
+            android:background="@drawable/buttonbg"
+            tools:ignore="NestedWeights" />
         <Button
             android:id="@+id/menuButtonHighScores"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="High Scores"
+            android:text="@string/high_scores"
             android:layout_marginLeft="10sp"
             android:onClick="goToHighScores"
-            android:background="@drawable/buttonbg"/>
+            android:background="@drawable/buttonbg"
+            tools:ignore="RtlHardcoded" />
         <Button
             android:id="@+id/menuButtonSettings"
             android:layout_width="0dp"
