@@ -170,7 +170,7 @@
 
     <LinearLayout
         android:id="@+id/overlayScreen"
-        android:layout_width="280sp"
+        android:layout_width="350sp"
         android:layout_height="300sp"
         android:background="@drawable/popupbg"
         android:gravity="center"
@@ -188,7 +188,7 @@
             android:layout_margin="10sp"
             android:text="@string/pausedText"
             android:textColor="@color/black"
-            android:textSize="45sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
         <TextView
@@ -200,20 +200,24 @@
 
         <Button
             android:layout_width="150sp"
-            android:layout_height="wrap_content"
+            android:layout_height="40sp"
             android:onClick="goToMainMenu"
             android:padding="5sp"
-            android:text="@string/main_menu" />
+            android:text="@string/main_menu"
+            android:background="@drawable/buttonbg"
+            android:layout_margin="5sp"/>
 
 
         <Button
             android:id="@+id/restartGame"
             android:layout_width="150sp"
-            android:layout_height="wrap_content"
+            android:layout_height="40sp"
             android:layout_marginBottom="20sp"
             android:onClick="toRestartGame"
             android:padding="5sp"
-            android:text="@string/restart_game" />
+            android:layout_margin="5sp"
+            android:text="@string/restart_game"
+            android:background="@drawable/buttonbg" />
 
 
     </LinearLayout>

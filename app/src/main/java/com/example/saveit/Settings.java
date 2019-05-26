@@ -19,7 +19,6 @@ public class Settings extends AppCompatActivity {
     private SharedPreferences preferences;
     private LinearLayout settingsLayout;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +52,7 @@ public class Settings extends AppCompatActivity {
                 .putInt("background number", 0)
                 .apply();
         settingsLayout.setBackgroundResource(R.drawable.bgone);
+        Toast.makeText(this, "Background changed to pink", Toast.LENGTH_SHORT).show();
     }
 
     //on click of background 2
@@ -61,6 +61,7 @@ public class Settings extends AppCompatActivity {
                 .putInt("background number", 1)
                 .apply();
         settingsLayout.setBackgroundResource(R.drawable.bgtwo);
+        Toast.makeText(this, "Background changed to orange", Toast.LENGTH_SHORT).show();
     }
 
     //on click of background 3
@@ -69,6 +70,31 @@ public class Settings extends AppCompatActivity {
                 .putInt("background number", 2)
                 .apply();
         settingsLayout.setBackgroundResource(R.drawable.bgthree);
+        Toast.makeText(this, "Background changed to blue", Toast.LENGTH_SHORT).show();
+    }
+
+    //on click of dog 1
+    public void changeToDog1(View view){
+        preferences.edit()
+                .putInt("dog number", 0)
+                .apply();
+        Toast.makeText(this, "Dog changed to brown", Toast.LENGTH_SHORT).show();
+    }
+
+    //on click of dog 2
+    public void changeToDog2(View view){
+        preferences.edit()
+                .putInt("dog number", 1)
+                .apply();
+        Toast.makeText(this, "Dog changed to black", Toast.LENGTH_SHORT).show();
+    }
+
+    //on click of dog 3
+    public void changeToDog3 (View view){
+        preferences.edit()
+                .putInt("dog number", 2)
+                .apply();
+        Toast.makeText(this, "Dog changed to dark brown", Toast.LENGTH_SHORT).show();
     }
 
 

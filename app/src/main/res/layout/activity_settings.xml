@@ -106,20 +106,23 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_margin="2sp"
-                android:background="@drawable/dogone"/>
+                android:background="@drawable/dogone"
+                android:onClick="changeToDog1"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_margin="2sp"
-                android:background="@drawable/dogtwo"/>
+                android:background="@drawable/dogtwo"
+                android:onClick="changeToDog2"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_margin="2sp"
-                android:background="@drawable/dogthree"/>
+                android:background="@drawable/dogthree"
+                android:onClick="changeToDog3"/>
         </LinearLayout>
 
 
