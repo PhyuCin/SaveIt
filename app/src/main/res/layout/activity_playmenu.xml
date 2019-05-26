@@ -29,31 +29,28 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_margin="5sp"
+            android:layout_margin="50sp"
             android:background="@drawable/easy"
             android:scaleType="centerInside"
             android:adjustViewBounds="true"
-            android:onClick="toEasy"/>
-        <Button
-            android:id="@+id/normalButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_margin="5sp"
-            android:background="@drawable/medium"
-            android:scaleType="centerInside"
-            android:adjustViewBounds="true"
-            android:onClick="toNormal"/>
+            android:onClick="toEasy"
+            android:text="@string/easy"
+            android:textStyle="bold"
+            android:textSize="25sp"/>
         <Button
             android:id="@+id/hardButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_margin="5sp"
+            android:layout_margin="50sp"
             android:background="@drawable/hard"
             android:scaleType="centerInside"
             android:adjustViewBounds="true"
-            android:onClick="toHard"/>
+            android:onClick="toHard"
+            android:text="@string/hard"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            />
     </LinearLayout>
 
 </LinearLayout>

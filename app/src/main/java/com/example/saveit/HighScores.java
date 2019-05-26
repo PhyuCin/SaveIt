@@ -61,7 +61,7 @@ public class HighScores extends AppCompatActivity {
             allTextViewsEasy[i].setText((i + 1) + "     ---     " + highScoresEasy.get(i) + "pts");
         }
 
-        highScoresHard = FileHelper.readDataEasy(this);
+        highScoresHard = FileHelper.readDataHard(this);
         System.out.println(highScoresHard);
 
         int num2 = highScoresHard.size();

@@ -13,8 +13,10 @@
     <string name="restart_game">Restart Game</string>
     <string name="back">Back</string>
     <string name="instructions1">Save the dogs by dragging them to the correct answer before they touch the ground.</string>
-    <string name="instructions2">You will lose a life when you drag it to the wrong answer so be careful!</string>
-    <string name="instructions3">You will lose when one of the dogs touches the ground or when the lives become zero. Good Luck!</string>
+    <string name="instructions2">After every five points, you can shake your phone to clear all the equations. However, they will drop faster</string>
+    <string name="instructions3">After getting five points, the answer numbers will disappear so make sure to memorise where they are.</string>
+    <string name="instructions4">You will lose a life when you drag it to the wrong answer so be careful!</string>
+    <string name="instructions5">You will lose when one of the dogs touches the ground or when the lives become zero. Good Luck!</string>
     <string name="instructonsTitle">Instructons</string>
     <string name="play">Play</string>
     <string name="high_scores">High Scores</string>
@@ -23,4 +25,6 @@
     <string name="three">3</string>
     <string name="five">5</string>
     <string name="ten">10</string>
+    <string name="easy">Easy</string>
+    <string name="hard">Hard</string>
 </resources>

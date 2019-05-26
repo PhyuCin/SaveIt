@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HardGame"
+    android:background="@drawable/bgone"
+    android:id="@+id/hardLayout">
+
+    <TextView
+        android:id="@+id/hardEqn1"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hardEqn2"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hardEqn3"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hardEqn4"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hardEqn5"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/hardEqn6"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:background="@drawable/dogone"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--areas for dropping the answers-->
+    <LinearLayout
+        android:id="@+id/answerLayout2"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/answer1"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5sp"/>
+
+        <TextView
+            android:id="@+id/answer3"
+            android:layout_marginTop="5sp"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/answerLayout1"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/answer2"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5sp"/>
+
+        <TextView
+            android:id="@+id/answer4"
+            android:layout_width="100dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5sp"/>
+    </LinearLayout>
+
+    <!--for displaying scores and if correct or wrong-->
+
+    <LinearLayout
+        android:id="@+id/displayStatus"
+        android:layout_width="match_parent"
+        android:layout_height="45sp"
+        android:orientation="horizontal"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/answerLayout1"
+        app:layout_constraintStart_toStartOf="@id/answerLayout2"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginEnd="100dp">
+
+        <TextView
+            android:id="@+id/lives"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:padding="10sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/scoresDisplay"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:gravity="end"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:padding="10sp"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/pausePlayButton"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:background="@drawable/pause"
+            android:onClick="pauseGame"
+            android:gravity="center"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/shakeDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/answerLayout1"
+        app:layout_constraintStart_toStartOf="@id/answerLayout2"
+
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginEnd="100dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/overlayScreen"
+        android:layout_width="350sp"
+        android:layout_height="300sp"
+        android:background="@drawable/popupbg"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/overlayTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10sp"
+            android:text="@string/pausedText"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/loseScoreDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:padding="5sp" />
+
+        <Button
+            android:layout_width="150sp"
+            android:layout_height="40sp"
+            android:onClick="goToMainMenu"
+            android:padding="5sp"
+            android:text="@string/main_menu"
+            android:background="@drawable/buttonbg"
+            android:layout_margin="5sp"/>
+
+
+        <Button
+            android:id="@+id/restartGame"
+            android:layout_width="150sp"
+            android:layout_height="40sp"
+            android:layout_marginBottom="20sp"
+            android:onClick="toRestartGame"
+            android:padding="5sp"
+            android:layout_margin="5sp"
+            android:text="@string/restart_game"
+            android:background="@drawable/buttonbg" />
+
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

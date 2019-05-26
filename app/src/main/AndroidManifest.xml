@@ -40,6 +40,9 @@
         <activity
             android:name=".EasyGame"
             android:screenOrientation="landscape" />
+        <activity
+            android:name=".HardGame"
+            android:screenOrientation="landscape" />
 
         <activity
             android:name=".HighScores"

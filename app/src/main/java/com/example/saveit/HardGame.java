@@ -29,13 +29,13 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class EasyGame extends AppCompatActivity{
+public class HardGame extends AppCompatActivity{
 
     // for handling background change and dog change
     private SharedPreferences preferences;
     private int background;
     private int dog;
-    private ConstraintLayout easyLayout;
+    private ConstraintLayout hardLayout;
 
     // Screen Size
     private int screenWidth;
@@ -60,10 +60,13 @@ public class EasyGame extends AppCompatActivity{
     private String[][] equationsList;
 
     private Random rand = new Random();
-    private int answer1Num = 0;
-    private int answer2Num = 0;
+    private int answer1Num, answer2Num, answer3Num, answer4Num;
+    private ArrayList<Integer> allAnswers = new ArrayList<Integer>();
     private String[] equationsSetOne;
     private String[] equationsSetTwo;
+    private String[] equationsSetThree;
+    private String[] equationsSetFour;
+
 
     //index for random equation to be selected
     private int randomIndex;
@@ -73,6 +76,8 @@ public class EasyGame extends AppCompatActivity{
     private TextView scoresDisplay;
     private TextView answer1;
     private TextView answer2;
+    private TextView answer3;
+    private TextView answer4;
 
 
     // correct status
@@ -120,16 +125,16 @@ public class EasyGame extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.easy_game);
+        setContentView(R.layout.hard_game);
 
         preferences = getSharedPreferences("value", MODE_PRIVATE);
 
         livesCount = preferences.getInt("number of lives", 3);
 
 
-        easyLayout = (ConstraintLayout) findViewById(R.id.easyLayout);
+        hardLayout = (ConstraintLayout) findViewById(R.id.hardLayout);
 
-        highScores = highScores = FileHelper.readDataEasy(this);
+        highScores = highScores = FileHelper.readDataHard(this);
 
 
         // handles audio
@@ -142,12 +147,12 @@ public class EasyGame extends AppCompatActivity{
         shakeAudio = soundManager.addSound(R.raw.shake);
 
 
-        eqn1 = (TextView) findViewById(R.id.easyEqn1);
-        eqn2 = (TextView) findViewById(R.id.easyEqn2);
-        eqn3 = (TextView) findViewById(R.id.easyEqn3);
-        eqn4 = (TextView) findViewById(R.id.easyEqn4);
-        eqn5 = (TextView) findViewById(R.id.easyEqn5);
-        eqn6 = (TextView) findViewById(R.id.easyEqn6);
+        eqn1 = (TextView) findViewById(R.id.hardEqn1);
+        eqn2 = (TextView) findViewById(R.id.hardEqn2);
+        eqn3 = (TextView) findViewById(R.id.hardEqn3);
+        eqn4 = (TextView) findViewById(R.id.hardEqn4);
+        eqn5 = (TextView) findViewById(R.id.hardEqn5);
+        eqn6 = (TextView) findViewById(R.id.hardEqn6);
 
         eqnTextViewsList = new TextView[]{eqn1,eqn2,eqn3,eqn4,eqn5,eqn6};
 
@@ -167,22 +172,35 @@ public class EasyGame extends AppCompatActivity{
 
         answer1 =(TextView) findViewById(R.id.answer1);
         answer2 = (TextView) findViewById(R.id.answer2);
+        answer3 =(TextView) findViewById(R.id.answer3);
+        answer4 = (TextView) findViewById(R.id.answer4);
 
         overlayTitle = (TextView) findViewById(R.id.overlayTitle);
         finalScoreDisplay = (TextView) findViewById(R.id.loseScoreDisplay);
         restartGame = (Button) findViewById(R.id.restartGame);
 
-        // choose random answers for the two answer areas
-        answer1Num = rand.nextInt(9);
-        while(answer1Num == answer2Num)
-            answer2Num = rand.nextInt(9);
+        // choose random answers
+        for (int i = 0; i < 9 ; ++i){
+            allAnswers.add(i);
+        }
+        Collections.shuffle(allAnswers);
+
+        answer1Num = allAnswers.get(0);
+        answer2Num = allAnswers.get(1);
+        answer3Num = allAnswers.get(2);
+        answer4Num = allAnswers.get(3);
+
 
         // set the two equations list
         equationsSetOne = equationsList[answer1Num];
         equationsSetTwo = equationsList[answer2Num];
+        equationsSetThree = equationsList[answer3Num];
+        equationsSetFour = equationsList[answer4Num];
 
         answer1.setText(String.format("%d", (answer1Num + 1)));
         answer2.setText(String.format("%d", (answer2Num + 1)));
+        answer3.setText(String.format("%d", (answer3Num + 1)));
+        answer4.setText(String.format("%d", (answer4Num + 1)));
 
 
         // motion sensor
@@ -212,6 +230,8 @@ public class EasyGame extends AppCompatActivity{
 
         answer1.setOnDragListener(dragListener1);
         answer2.setOnDragListener(dragListener2);
+        answer3.setOnDragListener(dragListener3);
+        answer4.setOnDragListener(dragListener4);
 
         // Start timer
         timer.schedule(new TimerTask() {
@@ -241,11 +261,11 @@ public class EasyGame extends AppCompatActivity{
         //change background
         background = preferences.getInt("background number", 0);
         if (background == 0) {
-            easyLayout.setBackgroundResource(R.drawable.bgone);
+            hardLayout.setBackgroundResource(R.drawable.bgone);
         } else if (background == 1) {
-            easyLayout.setBackgroundResource(R.drawable.bgtwo);
+            hardLayout.setBackgroundResource(R.drawable.bgtwo);
         } else if (background == 2) {
-            easyLayout.setBackgroundResource(R.drawable.bgthree);
+            hardLayout.setBackgroundResource(R.drawable.bgthree);
         }
 
         //change dogs;
@@ -320,6 +340,8 @@ public class EasyGame extends AppCompatActivity{
         if (score > 4){
             answer1.setText("");
             answer2.setText("");
+            answer3.setText("");
+            answer4.setText("");
         }
         if (score % 5 == 0 && score != 0 && count == 0){
             dogSpeed += 0.3f;
@@ -350,7 +372,7 @@ public class EasyGame extends AppCompatActivity{
         if(eqn2.getY() > screenHeight){
             //choosing random eqn
             randomIndex = rand.nextInt(30);
-            eqn2.setText(equationsSetOne[randomIndex]);
+            eqn2.setText(equationsSetTwo[randomIndex]);
 
             eqn2x = rand.nextInt(screenWidth - margin + 1 - margin) + margin;
             eqn2y = -100.0f;
@@ -366,7 +388,7 @@ public class EasyGame extends AppCompatActivity{
         if(eqn3.getY() > screenHeight){
             //choosing random eqn
             randomIndex = rand.nextInt(30);
-            eqn3.setText(equationsSetOne[randomIndex]);
+            eqn3.setText(equationsSetThree[randomIndex]);
 
             eqn3x = rand.nextInt(screenWidth - margin + 1 - margin) + margin;
             eqn3y = -100.0f;
@@ -382,7 +404,7 @@ public class EasyGame extends AppCompatActivity{
         if(eqn4.getY() > screenHeight){
             //choosing random eqn
             randomIndex = rand.nextInt(30);
-            eqn4.setText(equationsSetTwo[randomIndex]);
+            eqn4.setText(equationsSetFour[randomIndex]);
 
             if (!isValid){
 
@@ -416,7 +438,7 @@ public class EasyGame extends AppCompatActivity{
         if(eqn6.getY() > screenHeight){
             //choosing random eqn
             randomIndex = rand.nextInt(30);
-            eqn6.setText(equationsSetTwo[randomIndex]);
+            eqn6.setText(equationsSetOne[randomIndex]);
 
             eqn6x = rand.nextInt(screenWidth - margin + 1 - margin) + margin;
             eqn6y = -100.0f;
@@ -456,25 +478,31 @@ public class EasyGame extends AppCompatActivity{
                     break;
 
                 case DragEvent.ACTION_DROP:
-                    if(draggedTextView == R.id.easyEqn1){
+                    if(draggedTextView == R.id.hardEqn1){
                         eqn1.setX(-80.0f);
                         eqn1.setY(screenHeight + 80.0f);
                         isCorrect = true;
 
                     }
-                    else if(draggedTextView == R.id.easyEqn2){
+                    else if(draggedTextView == R.id.hardEqn2){
                         eqn2.setX(-80.0f);
                         eqn2.setY(screenHeight + 80.0f);
-                        isCorrect = true;
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
 
                     }
-                    else if(draggedTextView == R.id.easyEqn3){
+                    else if(draggedTextView == R.id.hardEqn3){
                         eqn3.setX(-80.0f);
                         eqn3.setY(screenHeight + 80.0f);
-                        isCorrect = true;
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
 
                     }
-                    else if(draggedTextView == R.id.easyEqn4){
+                    else if(draggedTextView == R.id.hardEqn4){
                         eqn4.setX(-80.0f);
                         eqn4.setY(screenHeight + 80.0f);
                         isCorrect = false;
@@ -482,7 +510,7 @@ public class EasyGame extends AppCompatActivity{
                         lives.setText("Lives: " + livesCount);
                         soundManager.play(wrongAudio);
                     }
-                    else if(draggedTextView == R.id.easyEqn5){
+                    else if(draggedTextView == R.id.hardEqn5){
                         eqn5.setX(-80.0f);
                         eqn5.setY(screenHeight + 80.0f);
                         isCorrect = false;
@@ -490,13 +518,10 @@ public class EasyGame extends AppCompatActivity{
                         lives.setText("Lives: " + livesCount);
                         soundManager.play(wrongAudio);
                     }
-                    else if(draggedTextView == R.id.easyEqn6){
+                    else if(draggedTextView == R.id.hardEqn6){
                         eqn6.setX(-80.0f);
                         eqn6.setY(screenHeight + 80.0f);
-                        isCorrect = false;
-                        --livesCount;
-                        lives.setText("Lives: " + livesCount);
-                        soundManager.play(wrongAudio);
+                        isCorrect = true;
                     }
 
                     if (isCorrect){
@@ -527,7 +552,7 @@ public class EasyGame extends AppCompatActivity{
                     break;
 
                 case DragEvent.ACTION_DROP:
-                    if(draggedTextView == R.id.easyEqn1){
+                    if(draggedTextView == R.id.hardEqn1){
                         eqn1.setX(-80.0f);
                         eqn1.setY(screenHeight + 80.0f);
                         isCorrect = false;
@@ -536,7 +561,82 @@ public class EasyGame extends AppCompatActivity{
                         soundManager.play(wrongAudio);
 
                     }
-                    else if(draggedTextView == R.id.easyEqn2){
+                    else if(draggedTextView == R.id.hardEqn2){
+                        eqn2.setX(-80.0f);
+                        eqn2.setY(screenHeight + 80.0f);
+                        isCorrect = true;
+
+                    }
+                    else if(draggedTextView == R.id.hardEqn3){
+                        eqn3.setX(-80.0f);
+                        eqn3.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+                    }
+                    else if(draggedTextView == R.id.hardEqn4){
+                        eqn4.setX(-80.0f);
+                        eqn4.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+
+                    }
+                    else if(draggedTextView == R.id.hardEqn5){
+                        eqn5.setX(-80.0f);
+                        eqn5.setY(screenHeight + 80.0f);
+                        isCorrect = true;
+
+                    }
+                    else if(draggedTextView == R.id.hardEqn6){
+                        eqn6.setX(-80.0f);
+                        eqn6.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+
+                    }
+                    if (isCorrect){
+                        ++score;
+                        scoresDisplay.setText("Points: " + score);
+                        count = 0;
+                        soundManager.play(correctAudio);
+                    }
+                    break;
+
+            }
+            return true;
+        }
+    };
+
+    // drag to answer 3
+    View.OnDragListener dragListener3 = new View.OnDragListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            int dragEvent = event.getAction();
+
+            switch(dragEvent){
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    break;
+
+                case DragEvent.ACTION_DRAG_EXITED:
+                    break;
+
+                case DragEvent.ACTION_DROP:
+                    if(draggedTextView == R.id.hardEqn1){
+                        eqn1.setX(-80.0f);
+                        eqn1.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+
+                    }
+                    else if(draggedTextView == R.id.hardEqn2){
                         eqn2.setX(-80.0f);
                         eqn2.setY(screenHeight + 80.0f);
                         isCorrect = false;
@@ -545,7 +645,85 @@ public class EasyGame extends AppCompatActivity{
                         soundManager.play(wrongAudio);
 
                     }
-                    else if(draggedTextView == R.id.easyEqn3){
+                    else if(draggedTextView == R.id.hardEqn3){
+                        eqn3.setX(-80.0f);
+                        eqn3.setY(screenHeight + 80.0f);
+                        isCorrect = true;
+                    }
+                    else if(draggedTextView == R.id.hardEqn4){
+                        eqn4.setX(-80.0f);
+                        eqn4.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+
+                    }
+                    else if(draggedTextView == R.id.hardEqn5){
+                        eqn5.setX(-80.0f);
+                        eqn5.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+
+                    }
+                    else if(draggedTextView == R.id.hardEqn6){
+                        eqn6.setX(-80.0f);
+                        eqn6.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+
+                    }
+                    if (isCorrect){
+                        ++score;
+                        scoresDisplay.setText("Points: " + score);
+                        count = 0;
+                        soundManager.play(correctAudio);
+                    }
+                    break;
+
+            }
+            return true;
+        }
+    };
+
+    // drag to answer 4
+    View.OnDragListener dragListener4 = new View.OnDragListener() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            int dragEvent = event.getAction();
+
+            switch(dragEvent){
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    break;
+
+                case DragEvent.ACTION_DRAG_EXITED:
+                    break;
+
+                case DragEvent.ACTION_DROP:
+                    if(draggedTextView == R.id.hardEqn1){
+                        eqn1.setX(-80.0f);
+                        eqn1.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+
+                    }
+                    else if(draggedTextView == R.id.hardEqn2){
+                        eqn2.setX(-80.0f);
+                        eqn2.setY(screenHeight + 80.0f);
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
+
+                    }
+                    else if(draggedTextView == R.id.hardEqn3){
                         eqn3.setX(-80.0f);
                         eqn3.setY(screenHeight + 80.0f);
                         isCorrect = false;
@@ -553,22 +731,28 @@ public class EasyGame extends AppCompatActivity{
                         lives.setText("Lives: " + livesCount);
                         soundManager.play(wrongAudio);
                     }
-                    else if(draggedTextView == R.id.easyEqn4){
+                    else if(draggedTextView == R.id.hardEqn4){
                         eqn4.setX(-80.0f);
                         eqn4.setY(screenHeight + 80.0f);
                         isCorrect = true;
 
                     }
-                    else if(draggedTextView == R.id.easyEqn5){
+                    else if(draggedTextView == R.id.hardEqn5){
                         eqn5.setX(-80.0f);
                         eqn5.setY(screenHeight + 80.0f);
-                        isCorrect = true;
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
 
                     }
-                    else if(draggedTextView == R.id.easyEqn6){
+                    else if(draggedTextView == R.id.hardEqn6){
                         eqn6.setX(-80.0f);
                         eqn6.setY(screenHeight + 80.0f);
-                        isCorrect = true;
+                        isCorrect = false;
+                        --livesCount;
+                        lives.setText("Lives: " + livesCount);
+                        soundManager.play(wrongAudio);
 
                     }
                     if (isCorrect){
@@ -694,7 +878,7 @@ public class EasyGame extends AppCompatActivity{
                 highScores.remove(highScores.size() - 1);
             }
             //save to file
-            FileHelper.writeDataEasy(highScores, this);
+            FileHelper.writeDataHard(highScores, this);
             System.out.println(highScores);
         }
     }
