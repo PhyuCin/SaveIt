@@ -3,16 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="20sp">
+    android:layout_margin="20sp"
+    android:background="@drawable/bgone">
 
     <!--back button-->
     <Button
         android:id="@+id/playMenuBack"
-        android:layout_width="wrap_content"
-        android:layout_height="50sp"
-        android:text="Back"
+        android:layout_width="80sp"
+        android:layout_height="35sp"
+        android:background="@drawable/buttonbg"
+        android:text="@string/back"
         android:layout_margin="5sp"
         android:onClick="goToMainMenu"
+
         />
 
     <LinearLayout

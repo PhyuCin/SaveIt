@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class HighScores extends AppCompatActivity {
 
-    private TextView first, second, third, fourth, fifth;
+    private TextView firstEasy, secondEasy, thirdEasy, fourthEasy, fifthEasy;
     private TextView[] allTextViews;
     private ArrayList<Integer> highScores = new ArrayList<Integer>();
 
@@ -22,13 +22,13 @@ public class HighScores extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.high_scores);
 
-        first = (TextView) findViewById(R.id.first);
-        second = (TextView) findViewById(R.id.second);
-        third = (TextView) findViewById(R.id.third);
-        fourth = (TextView) findViewById(R.id.fourth);
-        fifth = (TextView) findViewById(R.id.fifth);
+        firstEasy = (TextView) findViewById(R.id.firstEasy);
+        secondEasy = (TextView) findViewById(R.id.secondEasy);
+        thirdEasy = (TextView) findViewById(R.id.thirdEasy);
+        fourthEasy = (TextView) findViewById(R.id.fourthEasy);
+        fifthEasy = (TextView) findViewById(R.id.fifthEasy);
 
-        allTextViews = new TextView[]{first, second, third, fourth, fifth};
+        allTextViews = new TextView[]{firstEasy, secondEasy, thirdEasy, fourthEasy, fifthEasy};
 
         highScores = FileHelper.readData(this);
         System.out.println(highScores);

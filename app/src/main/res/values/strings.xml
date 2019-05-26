@@ -11,4 +11,9 @@
     <string name="pausedText">Paused!</string>
     <string name="main_menu">Main Menu</string>
     <string name="restart_game">Restart Game</string>
+    <string name="back">Back</string>
+    <string name="instructions1">Save the dogs by dragging them to the correct answer before they touch the ground.</string>
+    <string name="instructions2">You will lose a life when you drag it to the wrong answer so be careful!</string>
+    <string name="instructions3">You will lose when one of the dogs touches the ground or when the lives become zero. Good Luck!</string>
+    <string name="instructonsTitle">Instructons</string>
 </resources>
