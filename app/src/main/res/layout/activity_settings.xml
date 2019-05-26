@@ -152,7 +152,8 @@
                 android:text="@string/three"
                 android:background="@drawable/buttonbg"
                 android:layout_margin="2sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:onClick="changeLivesTo3"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -160,7 +161,8 @@
                 android:text="@string/five"
                 android:background="@drawable/buttonbg"
                 android:layout_margin="2sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:onClick="changeLivesTo5"/>
 
             <Button
                 android:layout_width="0dp"
@@ -169,7 +171,8 @@
                 android:text="@string/ten"
                 android:background="@drawable/buttonbg"
                 android:layout_margin="2sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:onClick="changeLivesTo10"/>
         </LinearLayout>
 
 

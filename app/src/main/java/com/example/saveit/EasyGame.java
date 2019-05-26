@@ -82,7 +82,7 @@ public class EasyGame extends AppCompatActivity{
     private int count = 0;
 
     // lives
-    private int livesCount = 5;
+    private int livesCount;
 
     // drag id
     private int draggedTextView;
@@ -123,6 +123,10 @@ public class EasyGame extends AppCompatActivity{
         setContentView(R.layout.easy_game);
 
         preferences = getSharedPreferences("value", MODE_PRIVATE);
+
+        livesCount = preferences.getInt("number of lives", 3);
+
+
         easyLayout = (ConstraintLayout) findViewById(R.id.easyLayout);
 
         highScores = highScores = FileHelper.readDataEasy(this);

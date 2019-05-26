@@ -97,6 +97,30 @@ public class Settings extends AppCompatActivity {
         Toast.makeText(this, "Dog changed to dark brown", Toast.LENGTH_SHORT).show();
     }
 
+    //on click of lives 3
+    public void changeLivesTo3(View view){
+        preferences.edit()
+                .putInt("number of lives", 3)
+                .apply();
+        Toast.makeText(this, "Number of lives changed to 3", Toast.LENGTH_SHORT).show();
+    }
+
+    //on click of lkives 5
+    public void changeLivesTo5(View view){
+        preferences.edit()
+                .putInt("number of lives", 5)
+                .apply();
+        Toast.makeText(this, "Number of lives changed to 5", Toast.LENGTH_SHORT).show();
+    }
+
+    //on click of lives 10
+    public void changeLivesTo10 (View view){
+        preferences.edit()
+                .putInt("number of lives", 10)
+                .apply();
+        Toast.makeText(this, "Number of lives changed to 10", Toast.LENGTH_SHORT).show();
+    }
+
 
     //on click of back button
     public void goToMainMenu(View view){
