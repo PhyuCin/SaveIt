@@ -7,4 +7,8 @@
     <string name="newHighScore">New High Score!</string>
     <string name="gameover">Game Over!</string>
     <string name="playAgain">Play Again</string>
+    <string name="reset_high_scores">Reset high scores</string>
+    <string name="pausedText">Paused!</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="restart_game">Restart Game</string>
 </resources>

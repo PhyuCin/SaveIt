@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HighScores"
-    android:background="@drawable/background">
+    android:background="@drawable/bgone">
 
     <Button
         android:id="@+id/playMenuBack"
@@ -19,83 +19,199 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+
     <LinearLayout
-        android:layout_width="350sp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:background="@color/white"
-        android:padding="20sp">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:text="HighScores"
+            android:layout_gravity="center"
             android:textSize="40sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_margin="5sp" />
+            android:layout_margin="20sp"
+            />
 
-        <TextView
-            android:id="@+id/first"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1     ---     0pts"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:layout_height="0dp"
+            android:layout_weight="6"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:layout_margin="5sp"
-            />
-        <TextView
-            android:id="@+id/second"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="2     ---     0pts"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_margin="5sp"
-            />
-        <TextView
-            android:id="@+id/third"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="3     ---     0pts"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_margin="5sp"
-            />
-        <TextView
-            android:id="@+id/fourth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="4     ---     0pts"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_margin="5sp"
-            />
-        <TextView
-            android:id="@+id/fifth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="5     ---     0pts"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_margin="5sp"
-            />
+            android:layout_marginBottom="30sp"
+            >
+
+            <LinearLayout
+                android:id="@+id/hardScores"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/popupbg"
+                android:orientation="vertical"
+                android:layout_margin="10sp"
+                android:padding="10sp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Easy"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5sp"/>
+
+                <TextView
+                    android:id="@+id/firstEasy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="1     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/secondEasy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="2     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/thirdEasy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="3     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fourthEasy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="4     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fifthEasy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="5     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/easyScores"
+                android:layout_height="match_parent"
+                android:background="@drawable/popupbg"
+                android:orientation="vertical"
+                android:layout_margin="10sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:padding="10sp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Hard"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:layout_margin="5sp"/>
+
+                <TextView
+                    android:id="@+id/firstHard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="1     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/secondHard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="2     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/thirdHard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="3     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fourthHard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="4     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fifthHard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:gravity="center"
+                    android:text="5     ---     0pts"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
+
+
+
+
+
 
 </android.support.constraint.ConstraintLayout>

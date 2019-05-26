@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".EasyGame"
-    android:background="@drawable/background">
+    android:background="@drawable/bgone">
 
     <TextView
         android:id="@+id/easyEqn1"
@@ -125,7 +125,7 @@
             android:layout_weight="3"
             android:layout_height="match_parent"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:padding="10sp"
             android:textStyle="bold"/>
         <TextView
@@ -135,7 +135,7 @@
             android:layout_height="match_parent"
             android:gravity="end"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:padding="10sp"
             android:textStyle="bold"/>
 
@@ -154,8 +154,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="30sp"
-        android:textColor="@color/white"
-        android:padding="10sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -171,56 +170,49 @@
     <LinearLayout
         android:id="@+id/overlayScreen"
         android:layout_width="280sp"
-        android:layout_height="wrap_content"
+        android:layout_height="300sp"
+        android:background="@drawable/popupbg"
+        android:gravity="center"
         android:orientation="vertical"
+        android:padding="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:gravity="center"
-
-        android:background="@color/white"
-        android:padding="20sp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/overlayTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:text="Paused!"
-            android:textColor="@color/black"
             android:layout_margin="10sp"
-            />
+            android:text="@string/pausedText"
+            android:textColor="@color/black"
+            android:textSize="45sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/loseScoreDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:padding="5sp" />
 
         <Button
             android:layout_width="150sp"
             android:layout_height="wrap_content"
-            android:text="Main Menu"
+            android:onClick="goToMainMenu"
             android:padding="5sp"
-            android:onClick="goToMainMenu"/>
+            android:text="@string/main_menu" />
 
-        <Button
-            android:layout_width="150sp"
-            android:layout_height="wrap_content"
-            android:text="Settings"
-            android:padding="5sp"
-            android:onClick="goToSettings"/>
 
         <Button
             android:id="@+id/restartGame"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
-            android:text="Restart Game"
-            android:padding="5sp"
+            android:layout_marginBottom="20sp"
             android:onClick="toRestartGame"
-            android:layout_marginBottom="20sp"/>
+            android:padding="5sp"
+            android:text="@string/restart_game" />
 
 
     </LinearLayout>

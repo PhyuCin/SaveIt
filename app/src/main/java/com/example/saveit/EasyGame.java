@@ -646,12 +646,6 @@ public class EasyGame extends AppCompatActivity{
         startActivity(intent);
     }
 
-    //on click of the settings button
-    public void goToSettings(View view){
-        Intent intent = new Intent(this, Settings.class );
-        startActivity(intent);
-    }
-
     public void toRestartGame(View view){
         Intent intent = new Intent(this, this.getClass());
         startActivity(intent);
