@@ -708,4 +708,14 @@ public class EasyGame extends AppCompatActivity{
         Intent intent = new Intent(this, this.getClass());
         startActivity(intent);
     }
+
+    public void onStop(){
+        super.onStop();
+        if(timer != null){
+            // cancel timer
+            timer.cancel();
+            timer = null;
+        }
+    }
+
 }
