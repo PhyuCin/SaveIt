@@ -27,7 +27,10 @@ public class Settings extends AppCompatActivity {
         preferences = getSharedPreferences("value", MODE_PRIVATE);
         settingsLayout = (LinearLayout) findViewById(R.id.settingsLayout);
 
-
+        //to make all the scores in the list zero
+        for (int i = 0; i < 5; ++i){
+            highScores.add(0);
+        }
     }
 
     // handles backgrounds
@@ -105,7 +108,7 @@ public class Settings extends AppCompatActivity {
         Toast.makeText(this, "Number of lives changed to 3", Toast.LENGTH_SHORT).show();
     }
 
-    //on click of lkives 5
+    //on click of lives 5
     public void changeLivesTo5(View view){
         preferences.edit()
                 .putInt("number of lives", 5)
@@ -131,6 +134,7 @@ public class Settings extends AppCompatActivity {
     //on click of reset high scores
     public void resetHighScores(View view){
         FileHelper.writeDataEasy(highScores, this);
+        FileHelper.writeDataHard(highScores, this);
         Toast.makeText(this, "High scores have been reset", Toast.LENGTH_SHORT).show();
     }
 }

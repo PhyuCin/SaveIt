@@ -221,10 +221,10 @@ public class EasyGame extends AppCompatActivity{
                     @Override
                     public void run() {
                         changePosition();
-                        if (livesCount == 0 || eqn1y > screenHeight - 150 || eqn2y > screenHeight - 150 || eqn3y > screenHeight - 150
-                                || eqn4y > screenHeight - 150
-                                || eqn5y > screenHeight - 150
-                                || eqn6y > screenHeight - 150) {
+                        if (livesCount == 0 || eqn1y > screenHeight - 200 || eqn2y > screenHeight - 200 || eqn3y > screenHeight - 200
+                                || eqn4y > screenHeight - 200
+                                || eqn5y > screenHeight - 200
+                                || eqn6y > screenHeight - 200) {
                             gameOver();
                         }
                     }

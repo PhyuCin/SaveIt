@@ -27,4 +27,6 @@
     <string name="ten">10</string>
     <string name="easy">Easy</string>
     <string name="hard">Hard</string>
+    <string name="dogTitle">Dog</string>
+    <string name="number_of_lives_title">Number of lives</string>
 </resources>
