@@ -42,7 +42,7 @@
             android:textSize="34sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_margin="10sp"
+            android:layout_margin="5sp"
             />
 
         <LinearLayout
@@ -51,18 +51,18 @@
             android:layout_weight="6"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginBottom="30sp"
+            android:layout_marginBottom="20sp"
             >
 
             <LinearLayout
-                android:id="@+id/hardScores"
+                android:id="@+id/easyScores"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:background="@drawable/popupbg"
                 android:orientation="vertical"
-                android:layout_margin="10sp"
-                android:padding="10sp"
+                android:layout_margin="5sp"
+                android:padding="5sp"
                 android:gravity="center">
 
                 <TextView
@@ -71,7 +71,7 @@
                     android:layout_gravity="center"
                     android:text="Easy"
                     android:textColor="@color/black"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_margin="5sp"/>
 
@@ -83,7 +83,7 @@
                     android:gravity="center"
                     android:text="1     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -94,7 +94,7 @@
                     android:gravity="center"
                     android:text="2     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:gravity="center"
                     android:text="3     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -116,7 +116,7 @@
                     android:gravity="center"
                     android:text="4     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -127,21 +127,20 @@
                     android:gravity="center"
                     android:text="5     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-
             <LinearLayout
-                android:id="@+id/easyScores"
+                android:id="@+id/hardScores"
                 android:layout_height="match_parent"
                 android:background="@drawable/popupbg"
                 android:orientation="vertical"
-                android:layout_margin="10sp"
+                android:layout_margin="5sp"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:padding="10sp"
+                android:padding="5sp"
                 android:gravity="center">
 
                 <TextView
@@ -150,7 +149,7 @@
                     android:layout_gravity="center"
                     android:text="Hard"
                     android:textColor="@color/black"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_margin="5sp"/>
 
@@ -162,7 +161,7 @@
                     android:gravity="center"
                     android:text="1     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -173,7 +172,7 @@
                     android:gravity="center"
                     android:text="2     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -184,7 +183,7 @@
                     android:gravity="center"
                     android:text="3     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -195,7 +194,7 @@
                     android:gravity="center"
                     android:text="4     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -206,7 +205,7 @@
                     android:gravity="center"
                     android:text="5     ---     0pts"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
             </LinearLayout>

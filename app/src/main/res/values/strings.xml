@@ -17,7 +17,7 @@
     <string name="instructions3">After getting five points, the answer numbers will disappear so make sure to memorise where they are.</string>
     <string name="instructions4">You will lose a life when you drag it to the wrong answer so be careful!</string>
     <string name="instructions5">You will lose when one of the dogs touches the ground or when the lives become zero. Good Luck!</string>
-    <string name="instructonsTitle">Instructons</string>
+    <string name="instructonsTitle">Instructions</string>
     <string name="play">Play</string>
     <string name="high_scores">High Scores</string>
     <string name="settings">Settings</string>

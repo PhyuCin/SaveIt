@@ -657,15 +657,14 @@ public class EasyGame extends AppCompatActivity{
 
 
         if (highestScore < score){
-            soundManager.play(winAudio);
             overlayTitle.setText(getString(R.string.newHighScore));
         }
 
         else{
-            soundManager.play(loseAudio);
             overlayTitle.setText(getString(R.string.gameover));
         }
 
+        soundManager.play(loseAudio);
         restartGame.setText(getString(R.string.playAgain));
         finalScoreDisplay.setText("Score: " + score);
 
